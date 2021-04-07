@@ -1,7 +1,8 @@
 from datetime import datetime
-
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
+from wtforms.fields import StringField, PasswordField, TextField
+from sqlalchemy_utils import EmailType, PasswordType
 
 bcrypt = Bcrypt()
 db = SQLAlchemy()
@@ -9,7 +10,6 @@ db = SQLAlchemy()
 
 class User(db.Model):
     """User in the system."""
-
     __tablename__ = 'users'
 
     id = db.Column(
@@ -18,15 +18,17 @@ class User(db.Model):
     )
 
     email = db.Column(
-        db.Text,
+        EmailType,
         nullable=False,
         unique=True,
+        info={'label': 'Email'}
     )
 
     username = db.Column(
-        db.Text,
+        db.String,
         nullable=False,
         unique=True,
+        info={'label': 'Username'}
     )
 
     image_url = db.Column(
@@ -36,15 +38,20 @@ class User(db.Model):
 
     bio = db.Column(
         db.Text,
+        default=u''
     )
 
     country = db.Column(
         db.Text,
+        default=u'USA'
     )
 
     password = db.Column(
-        db.Text,
+        PasswordType(
+            schemes=['pbkdf2_sha512']
+        ),
         nullable=False,
+        info={'label': 'Password'}
     )
 
     created_at = db.Column(

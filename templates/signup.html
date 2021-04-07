@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block body_class %}onboarding{% endblock %}
+
+{% block content %}
+
+<div>
+    <div>
+        <h2 class=>Sign up for Personalized Vault Experience</h2>
+        <form method="POST" id="user_form">
+            {{ form.hidden_tag() }}
+
+            {% for field in form if field.widget.input_type != 'hidden' %}
+            {% for error in field.errors %}
+            <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+            <div class="field">
+                <label for="field" class="label">{{field.label.text}}</label>
+                <div class="control">
+                    {{field(class_="input")}}
+                </div>
+            </div>
+            {% endfor %}
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="button is-link">Sign me up!</button>
+                </div>
+                <div class="control">
+                    <button class="button is-link is-light">Cancel</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}
