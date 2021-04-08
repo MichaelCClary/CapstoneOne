@@ -39,3 +39,4 @@ class LoginForm(ModelForm):
     class Meta:
         model = User
         only = ['username', 'password']
+        unique_validator = None

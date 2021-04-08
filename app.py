@@ -1,10 +1,11 @@
+from flask_bcrypt import Bcrypt
 import os
 
 from flask import Flask, render_template, request, flash, redirect, session, g
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 from wtforms_alchemy import ModelForm
-from forms import UserAddForm
+from forms import UserAddForm, LoginForm
 from models import db, connect_db, User, Game, Collection
 from config import Config
 
@@ -15,6 +16,8 @@ app.config.from_object('config.Config')
 toolbar = DebugToolbarExtension(app)
 
 connect_db(app)
+
+bcrypt = Bcrypt()
 
 
 @app.before_request
@@ -55,6 +58,9 @@ def sign_up():
 
     if form.validate_on_submit():
         try:
+            print("******************************************")
+            print(form.password.data, flush=True)
+            print(form.username.data, flush=True)
             user = User.signup(
                 username=form.username.data,
                 password=form.password.data,
@@ -72,3 +78,30 @@ def sign_up():
         return redirect("/")
     else:
         return render_template('signup.html', form=form)
+
+
+@app.route('/login', methods=["GET", "POST"])
+def log_in():
+    form = LoginForm()
+
+    if form.validate_on_submit():
+        print("******************************************")
+        print(form.password.data, flush=True)
+        print(form.username.data, flush=True)
+        user = User.authenticate(form.username.data,
+                                 form.password.data)
+
+        if user:
+            do_login(user)
+            flash(f"Hello, {user.username}!", "success")
+            return redirect("/")
+
+        flash("Invalid credentials.", 'danger')
+
+    return render_template('login.html', form=form)
+
+
+@app.route('/logout', methods=["GET"])
+def log_out():
+    do_logout()
+    return redirect("/")

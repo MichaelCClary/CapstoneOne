@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from wtforms.fields import StringField, PasswordField, TextField
 from sqlalchemy_utils import EmailType, PasswordType
 
-bcrypt = Bcrypt()
+flask_bcrypt = Bcrypt()
 db = SQLAlchemy()
 
 
@@ -47,11 +47,9 @@ class User(db.Model):
     )
 
     password = db.Column(
-        PasswordType(
-            schemes=['pbkdf2_sha512']
-        ),
+        db.Text,
         nullable=False,
-        info={'label': 'Password'}
+        info={'label': 'Password', 'form_field_class': PasswordField}
     )
 
     created_at = db.Column(
@@ -70,7 +68,8 @@ class User(db.Model):
         Hashes password and adds user to system.
         """
 
-        hashed_pwd = bcrypt.generate_password_hash(password).decode('UTF-8')
+        hashed_pwd = flask_bcrypt.generate_password_hash(
+            password).decode('UTF-8')
 
         user = User(
             username=username,
@@ -96,7 +95,8 @@ class User(db.Model):
         user = cls.query.filter_by(username=username).first()
 
         if user:
-            is_auth = bcrypt.check_password_hash(user.password, password)
+            is_auth = flask_bcrypt.check_password_hash(
+                user.password, password)
             if is_auth:
                 return user
 
