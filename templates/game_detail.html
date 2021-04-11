@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<section>
+    {% for game in games %}
+    <div class="card">
+        <div class="card-content">
+            <div class="media">
+                <div class="media-left">
+                    <figure class="image">
+                        <img src={{game['image_url']}} alt="Placeholder image">
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <p class="title is-1">{{game['name']}}</p>
+                    <a class="button is-success" data-id="{{game['id']}}" href="#">Add To Collection</a>
+                    <p>Min Players: {{game['min_players']}}</p>
+                    <p>Max Players: {{game['max_players']}}</p>
+                    <p>MSRP: ${{game['msrp']}}</p>
+                </div>
+            </div>
+            <p class="title is-4">Description</p>
+            <div class="content">
+                {{game['description']|safe}}
+            </div>
+            {% if game['faq'] != ''%}
+            <p class="title is-4">FAQ</p>
+            <div class="content">
+                {{game['faq']|safe}}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</section>
+{% endblock %}

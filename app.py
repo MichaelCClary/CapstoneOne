@@ -8,6 +8,7 @@ from wtforms_alchemy import ModelForm
 from forms import UserAddForm, LoginForm
 from models import db, connect_db, User, Game, Collection
 from config import Config
+from external_routes import search_board_games
 
 CURR_USER_KEY = "curr_user"
 
@@ -48,19 +49,17 @@ def do_logout():
 def homepage():
     """Show homepage
     """
-
-    return render_template('home.html')
+    games = search_board_games()
+    return render_template('home.html', games=games)
 
 
 @app.route('/signup', methods=["GET", "POST"])
 def sign_up():
+    """Sign up new user"""
     form = UserAddForm()
 
     if form.validate_on_submit():
         try:
-            print("******************************************")
-            print(form.password.data, flush=True)
-            print(form.username.data, flush=True)
             user = User.signup(
                 username=form.username.data,
                 password=form.password.data,
@@ -85,9 +84,6 @@ def log_in():
     form = LoginForm()
 
     if form.validate_on_submit():
-        print("******************************************")
-        print(form.password.data, flush=True)
-        print(form.username.data, flush=True)
         user = User.authenticate(form.username.data,
                                  form.password.data)
 
@@ -105,3 +101,11 @@ def log_in():
 def log_out():
     do_logout()
     return redirect("/")
+
+
+@app.route('/games/<id>')
+def game_details(id):
+    """Show a single game detailes"""
+    params = {'ids': id}
+    games = search_board_games(params)
+    return render_template('game_detail.html', games=games)

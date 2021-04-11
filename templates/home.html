@@ -11,4 +11,34 @@
         <p>Sign up or Log in to get started!</p>
     </div>
 </section>
+<section>
+    {% for game in games %}
+    <div class="card">
+        <div class="card-content">
+            <div class="media">
+                <div class="media-left">
+                    <figure class="image is-128x128">
+                        <img src={{game['image_url']}} alt="Placeholder image">
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <p class="title is-4">{{game['name']}}</p>
+                    <nav class="breadcrumb" aria-label="breadcrumbs">
+                        <ul>
+                            <li><a class="button is-link" href="/games/{{game['id']}}">More Info</a></li>
+                            <li><a class="button is-success" data-id="{{game['id']}}" href="#">Add To Collection</a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                </div>
+            </div>
+
+            <div class="content">
+                {{game['description']|safe}}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</section>
 {% endblock %}
