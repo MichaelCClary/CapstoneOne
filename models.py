@@ -126,7 +126,7 @@ class Game(db.Model):
         db.Text
     )
 
-    rating = db.Column(
+    faq = db.Column(
         db.Text
     )
 
@@ -142,10 +142,38 @@ class Game(db.Model):
         db.Integer
     )
 
+    min_players = db.Column(
+        db.Integer
+    )
+
+    max_playtime = db.Column(
+        db.Integer
+    )
+
+    min_playtime = db.Column(
+        db.Integer
+    )
+
+    min_age = db.Column(
+        db.Integer
+    )
+
     created_at = db.Column(
         db.DateTime,
         nullable=False,
         default=datetime.utcnow(),
+    )
+
+    mechanic = db.relationship(
+        "Mechanic",
+        secondary="games_mechanics",
+        backref=db.backref('game', lazy='subquery')
+    )
+
+    category = db.relationship(
+        "Category",
+        secondary="games_categories",
+        backref=db.backref('game', lazy='subquery')
     )
 
     def __repr__(self):
@@ -182,6 +210,96 @@ class Rating(db.Model):
     rating = db.Column(
         db.Integer
     )
+
+
+class Mechanic(db.Model):
+    """Game mechanics"""
+
+    __tablename__ = 'mechanics'
+
+    id = db.Column(
+        db.Text,
+        primary_key=True
+    )
+
+    name = db.Column(
+        db.Text,
+        nullable=False
+    )
+
+    created_at = db.Column(
+        db.DateTime,
+        nullable=False,
+        default=datetime.utcnow(),
+    )
+
+
+games_mechanics = db.Table('games_mechanics',
+                           db.Column('mechanic_id',
+                                     db.Text,
+                                     db.ForeignKey(
+                                         'mechanics.id', ondelete='cascade'),
+                                     primary_key=True
+                                     ),
+
+                           db.Column('game_id',
+                                     db.Integer,
+                                     db.ForeignKey(
+                                         'games.id', ondelete='cascade'),
+                                     primary_key=True
+                                     ),
+
+                           db.Column('created_at',
+                                     db.DateTime,
+                                     nullable=False,
+                                     default=datetime.utcnow(),
+                                     )
+                           )
+
+
+class Category(db.Model):
+    """Game categories"""
+
+    __tablename__ = 'categories'
+
+    id = db.Column(
+        db.Text,
+        primary_key=True
+    )
+
+    name = db.Column(
+        db.Text,
+        nullable=False
+    )
+
+    created_at = db.Column(
+        db.DateTime,
+        nullable=False,
+        default=datetime.utcnow(),
+    )
+
+
+games_categories = db.Table('games_categories',
+                            db.Column('category_id',
+                                      db.Text,
+                                      db.ForeignKey(
+                                          'categories.id', ondelete='cascade'),
+                                      primary_key=True
+                                      ),
+
+                            db.Column('game_id',
+                                      db.Integer,
+                                      db.ForeignKey(
+                                          'games.id', ondelete='cascade'),
+                                      primary_key=True
+                                      ),
+
+                            db.Column('created_at',
+                                      db.DateTime,
+                                      nullable=False,
+                                      default=datetime.utcnow(),
+                                      )
+                            )
 
 
 class Collection(db.Model):

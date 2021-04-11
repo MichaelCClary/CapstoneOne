@@ -6,9 +6,9 @@ from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 from wtforms_alchemy import ModelForm
 from forms import UserAddForm, LoginForm
-from models import db, connect_db, User, Game, Collection
+from models import db, connect_db, User, Game, Collection, Mechanic, Category
 from config import Config
-from external_routes import search_board_games
+from external_routes import search_board_games, update_mechanics, update_categories
 
 CURR_USER_KEY = "curr_user"
 
@@ -19,6 +19,9 @@ toolbar = DebugToolbarExtension(app)
 connect_db(app)
 
 bcrypt = Bcrypt()
+
+update_mechanics()
+update_categories()
 
 
 @app.before_request
@@ -50,7 +53,7 @@ def homepage():
     """Show homepage
     """
     games = search_board_games()
-    return render_template('home.html', games=games)
+    return render_template('home.html', games=games['games'])
 
 
 @app.route('/signup', methods=["GET", "POST"])
@@ -105,7 +108,7 @@ def log_out():
 
 @app.route('/games/<id>')
 def game_details(id):
-    """Show a single game detailes"""
+    """Show a single game details"""
     params = {'ids': id}
-    games = search_board_games(params)
+    games = search_board_games(params)['games']
     return render_template('game_detail.html', games=games)

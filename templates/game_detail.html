@@ -13,8 +13,9 @@
                 <div class="media-content">
                     <p class="title is-1">{{game['name']}}</p>
                     <a class="button is-success" data-id="{{game['id']}}" href="#">Add To Collection</a>
-                    <p>Min Players: {{game['min_players']}}</p>
-                    <p>Max Players: {{game['max_players']}}</p>
+                    <p>Players: {{game['min_players']}} - {{game['max_players']}} </p>
+                    <p>Playtime: {{game['min_playtime']}} - {{game['max_playtime']}} </p>
+                    <p>Recommended Age: {{game['min_age']}}</p>
                     <p>MSRP: ${{game['msrp']}}</p>
                 </div>
             </div>
