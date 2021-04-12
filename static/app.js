@@ -9,3 +9,19 @@ $(document).ready(function () {
 
     });
 });
+
+$(document).on("click", "#addCollection", function () {
+    const id = $(this).attr('data-id');
+    addToCollection(id)
+});
+
+
+async function addToCollection(id) {
+    const result = await axios.post(`/api/collection/add`, { id: id });
+    if (result.data == "added") {
+        $("#addCollection").text("In Your Collection");
+        $("#addCollection").attr("id", "");
+    } else {
+        $("#collection_error").html("<p>Can't add that to your collection when not logged in</p")
+    }
+}

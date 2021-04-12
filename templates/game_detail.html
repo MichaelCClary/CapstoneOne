@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
+
 <section>
-    {% for game in games %}
     <div class="card">
         <div class="card-content">
             <div class="media">
@@ -12,11 +12,33 @@
                 </div>
                 <div class="media-content">
                     <p class="title is-1">{{game['name']}}</p>
-                    <a class="button is-success" data-id="{{game['id']}}" href="#">Add To Collection</a>
+                    <a class="button is-success" data-id="{{game['api_id']}}" href="#">Add To Collection</a>
                     <p>Players: {{game['min_players']}} - {{game['max_players']}} </p>
-                    <p>Playtime: {{game['min_playtime']}} - {{game['max_playtime']}} </p>
+                    <p>Playtime: {{game['min_playtime']}} - {{game['max_playtime']}} Min</p>
                     <p>Recommended Age: {{game['min_age']}}</p>
                     <p>MSRP: ${{game['msrp']}}</p>
+                </div>
+                <div class="media-content">
+
+
+                </div>
+            </div>
+            <div class="content">
+                <p class="title is-4">Mechanics</p>
+                <div class="tags">
+                    {% for mechanic in game['mechanics'] %}
+                    <span class="tag">
+                        {{mechanic['name']}}
+                    </span>
+                    {% endfor %}
+                </div>
+                <p class="title is-4">Categories</p>
+                <div class="tags">
+                    {% for category in game['categories'] %}
+                    <span class="tag">
+                        {{category['name']}}
+                    </span>
+                    {% endfor %}
                 </div>
             </div>
             <p class="title is-4">Description</p>
@@ -31,6 +53,5 @@
             {% endif %}
         </div>
     </div>
-    {% endfor %}
 </section>
 {% endblock %}

@@ -26,17 +26,28 @@
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li><a class="button is-link" href="/games/{{game['id']}}">More Info</a></li>
-                            <li><a class="button is-success" data-id="{{game['id']}}" href="#">Add To Collection</a>
+                            {% if game['id'] not in ids %}
+                            <li><button class="button is-success" data-id="{{game['id']}}" type="button"
+                                    id="addCollection">Add To
+                                    Collection</button>
                             </li>
+                            {%else%}
+                            <li><button class="button is-success" data-id="{{game['id']}}" type="button">In Your
+                                    Collection</button>
+                            </li>
+                            {% endif %}
+
                         </ul>
+                        <div id="collection_error"></div>
                     </nav>
+                    <div class="media-content">
+                        {{game['description']|safe}}
+                    </div>
 
                 </div>
             </div>
 
-            <div class="content">
-                {{game['description']|safe}}
-            </div>
+
         </div>
     </div>
     {% endfor %}

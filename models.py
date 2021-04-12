@@ -58,6 +58,12 @@ class User(db.Model):
         default=datetime.utcnow(),
     )
 
+    collection = db.relationship(
+        "Game",
+        secondary="collections",
+        backref=db.backref('user', lazy='subquery')
+    )
+
     def __repr__(self):
         return f"<User #{self.id}: {self.username}, {self.email}>"
 
@@ -135,7 +141,8 @@ class Game(db.Model):
     )
 
     api_id = db.Column(
-        db.Text
+        db.Text,
+        unique=True
     )
 
     max_players = db.Column(
@@ -164,13 +171,13 @@ class Game(db.Model):
         default=datetime.utcnow(),
     )
 
-    mechanic = db.relationship(
+    mechanics = db.relationship(
         "Mechanic",
         secondary="games_mechanics",
         backref=db.backref('game', lazy='subquery')
     )
 
-    category = db.relationship(
+    categories = db.relationship(
         "Category",
         secondary="games_categories",
         backref=db.backref('game', lazy='subquery')

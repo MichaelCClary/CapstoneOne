@@ -41,4 +41,40 @@ def update_categories():
     db.session.close()
 
 
-def add_game_to_db():
+def add_game_to_db(id):
+    params = {'ids': id}
+    game = search_board_games(params)['games'][0]
+    try:
+        new_game = Game(
+            api_id=game['id'],
+            name=game['name'],
+            msrp=game['msrp'],
+            description=game['description'],
+            faq=game['faq'],
+            min_age=game['min_age'],
+            min_players=game['min_players'],
+            max_players=game['max_players'],
+            min_playtime=game['min_playtime'],
+            max_playtime=game['max_playtime'],
+            image_url=game['image_url']
+        )
+        db.session.add(new_game)
+        db.session.commit()
+
+        for mechanic in game['mechanics']:
+            m = Mechanic.query.filter(
+                Mechanic.id == mechanic['id']).first()
+            new_game.mechanics.append(m)
+
+        for category in game['categories']:
+            c = Category.query.filter(
+                Category.id == category['id']).first()
+            new_game.categories.append(c)
+
+        db.session.commit()
+        return new_game
+    except:
+        db.session.close()
+        game = Game.query.filter(
+            Game.api_id == game['id']).first()
+        return game

@@ -1,14 +1,14 @@
 from flask_bcrypt import Bcrypt
 import os
 
-from flask import Flask, render_template, request, flash, redirect, session, g
+from flask import Flask, render_template, request, flash, redirect, session, g, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 from wtforms_alchemy import ModelForm
 from forms import UserAddForm, LoginForm
 from models import db, connect_db, User, Game, Collection, Mechanic, Category
 from config import Config
-from external_routes import search_board_games, update_mechanics, update_categories
+from external_routes import search_board_games, update_mechanics, update_categories, add_game_to_db
 
 CURR_USER_KEY = "curr_user"
 
@@ -53,7 +53,8 @@ def homepage():
     """Show homepage
     """
     games = search_board_games()
-    return render_template('home.html', games=games['games'])
+    ids = get_collection_ids(g.user)
+    return render_template('home.html', games=games['games'], ids=ids)
 
 
 @app.route('/signup', methods=["GET", "POST"])
@@ -109,6 +110,39 @@ def log_out():
 @app.route('/games/<id>')
 def game_details(id):
     """Show a single game details"""
-    params = {'ids': id}
-    games = search_board_games(params)['games']
-    return render_template('game_detail.html', games=games)
+    game = Game.query.filter(
+        Game.api_id == id).first()
+
+    if not game:
+        game = add_game_to_db(id)
+
+    return render_template('game_detail.html', game=game)
+
+
+@app.route('/api/collection/add', methods=['POST'])
+def add_to_collection():
+
+    if not g.user:
+        return jsonify("error")
+
+    content = request.get_json()
+    api_id = content.get('id', "")
+
+    game = Game.query.filter(
+        Game.api_id == api_id).first()
+
+    if not game:
+        game = game = add_game_to_db(api_id)
+
+    g.user.collection.append(game)
+    db.session.commit()
+    return jsonify("added")
+
+
+def get_collection_ids(user):
+    ids = []
+    if user:
+        for game in user.collection:
+            ids.append(game.api_id)
+
+    return ids
