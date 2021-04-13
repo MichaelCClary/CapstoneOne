@@ -10,19 +10,14 @@ $(document).ready(function () {
     });
 });
 
-$(document).on("click", "#addCollection", function () {
+$(document).on("click", "#addCollection", async function () {
     const id = $(this).attr('data-id');
-    addToCollection(id)
-});
-
-
-async function addToCollection(id) {
     const result = await axios.post(`/api/collection/add`, { id: id });
     if (result.data == "added") {
-        $("#addCollection").html("<i class='far fa-check-square'></i> <span>&nbsp;</span> Collected");
-        $("#addCollection").attr("class", "button is-info");
-        $("#addCollection").attr("id", "");
+        $(this).html("<i class='far fa-check-square'></i> <span>&nbsp;</span> Collected");
+        $(this).attr("class", "button is-info");
+        $(this).attr("id", "");
     } else {
         $("#collection_error").html("<p>Can't add that to your collection when not logged in</p")
     }
-}
+});

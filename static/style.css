@@ -1,7 +1,9 @@
-body {
+
+html, body {
+    height: 100vh;
+    padding: 0;
     background-color:#76232E;
 }
-
 #game_detail_image{
     max-height: 500px;
     max-width: 500px;
@@ -13,9 +15,4 @@ body {
 
 .card .tag {
     background-color: #FFE4E4;
-}
-
-.tile_div {
-    display: flex;
-    flex-wrap: wrap;
 }

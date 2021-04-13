@@ -140,7 +140,7 @@ def add_to_collection():
         Game.api_id == api_id).first()
 
     if not game:
-        game = game = add_game_to_db(api_id)
+        game = add_game_to_db(api_id)
 
     g.user.collection.append(game)
     db.session.commit()

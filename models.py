@@ -326,8 +326,7 @@ class Collection(db.Model):
 
     game_id = db.Column(
         db.Integer,
-        db.ForeignKey('games.id', ondelete='cascade'),
-        unique=True
+        db.ForeignKey('games.id', ondelete='cascade')
     )
 
     created_at = db.Column(
