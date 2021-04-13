@@ -7,20 +7,31 @@
             <div class="media">
                 <div class="media-left">
                     <figure class="image">
-                        <img src={{game['image_url']}} alt="Placeholder image">
+                        <img src={{game['image_url']}} alt="{{game['name']}} image" id="game_detail_image">
                     </figure>
                 </div>
                 <div class="media-content">
                     <p class="title is-1">{{game['name']}}</p>
-                    <a class="button is-success" data-id="{{game['api_id']}}" href="#">Add To Collection</a>
+
+                    <ul>
+                        {% if game['api_id'] not in ids %}
+                        <li><button class="button is-success" data-id="{{game['api_id']}}" type="button"
+                                id="addCollection">Add To
+                                Collection</button>
+                        </li>
+                        {%else%}
+                        <li><button class="button is-info" data-id="{{game['api_id']}}" type="button">
+                                <i class="far fa-check-square"></i> <span>&nbsp;</span> Collected
+                            </button></li>
+                        {% endif %}
+
+                    </ul>
+                    <div id="collection_error"></div>
+
                     <p>Players: {{game['min_players']}} - {{game['max_players']}} </p>
                     <p>Playtime: {{game['min_playtime']}} - {{game['max_playtime']}} Min</p>
                     <p>Recommended Age: {{game['min_age']}}</p>
                     <p>MSRP: ${{game['msrp']}}</p>
-                </div>
-                <div class="media-content">
-
-
                 </div>
             </div>
             <div class="content">

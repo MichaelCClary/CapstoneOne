@@ -1,3 +1,21 @@
-.media-content {
-    margin-left: .25rem;
+body {
+    background-color:#76232E;
+}
+
+#game_detail_image{
+    max-height: 500px;
+    max-width: 500px;
+}
+
+.card {
+    background-color: #FFE4E4;
+}
+
+.card .tag {
+    background-color: #FFE4E4;
+}
+
+.tile_div {
+    display: flex;
+    flex-wrap: wrap;
 }

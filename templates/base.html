@@ -13,7 +13,7 @@
 </head>
 
 <body class="{% block body_class %}{% endblock %}">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item" href="/">
                 Vault
@@ -31,11 +31,9 @@
             <div class="navbar-start">
 
                 <a class="navbar-item">
-                    Documentation
+                    Search
                 </a>
             </div>
-
-
             {% if not g.user %}
             <div class="navbar-end">
                 <div class="navbar-item">
@@ -53,6 +51,9 @@
             <div class="navbar-end">
                 <div class="navbar-item">
                     <div class="buttons">
+                        <a class="button" href="/user/{{g.user.id}}">
+                            <i class="fas fa-user"></i> <span>&nbsp;</span> {{ g.user.username}}
+                        </a>
                         <a class="button is-light" href="/logout">
                             Log out
                         </a>

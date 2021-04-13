@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section>
+    <div class="card">
+        <div class="card-content">
+            <div class="media">
+                <div class="media-left">
+                    <figure class="image">
+                        <img src={{user['image_url']}} alt="{{user['username']}} user image" id="user_detail_image">
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <p class="title is-1">
+                        {{g.user['username']}}
+                        <a href="/user/edit/<user-id>" class="button is-info">
+                            <i class="fas fa-user-edit"></i>
+                            <span>&nbsp;</span> Edit
+                        </a>
+                    </p>
+                    <p class="title is-4">Country: {{g.user['country']}}</p>
+                    <p class="title is-4">Bio: {{g.user['bio']}}</p>
+
+                </div>
+            </div>
+        </div>
+        <p class="title is-2">Collection</p>
+        <div class="tile is-ancestor is-flex-wrap-wrap">
+            {% for game in user.collection %}
+            <div class="tile is-5 ml-5">
+                <div class="tile is-parent">
+                    <article class="tile is-child notification is-dark">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <figure class="image is-128x128">
+                                            <img src={{game['image_url']}} alt="{{game['name']}} image">
+                                        </figure>
+                                    </div>
+                                    <div class="media-content">
+                                        <p class="title is-4">{{game['name']}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+</section>
+{% endblock %}

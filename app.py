@@ -107,6 +107,12 @@ def log_out():
     return redirect("/")
 
 
+@app.route('/user/<int:user_id>')
+def user_details(user_id):
+    user = User.query.get_or_404(user_id)
+    return render_template("user_details.html", user=user)
+
+
 @app.route('/games/<id>')
 def game_details(id):
     """Show a single game details"""
@@ -116,7 +122,9 @@ def game_details(id):
     if not game:
         game = add_game_to_db(id)
 
-    return render_template('game_detail.html', game=game)
+    ids = get_collection_ids(g.user)
+
+    return render_template('game_detail.html', game=game, ids=ids)
 
 
 @app.route('/api/collection/add', methods=['POST'])
