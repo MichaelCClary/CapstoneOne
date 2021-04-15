@@ -2,17 +2,22 @@
 html, body {
     height: 100vh;
     padding: 0;
-    background-color:#76232E;
+    background-color:#760413;
 }
 #game_detail_image{
     max-height: 500px;
     max-width: 500px;
 }
 
+.collection_image{
+    max-height: 130px;
+    max-width: 130px;
+}
 .card {
-    background-color: #FFE4E4;
+    background-color: #D1E7E0;
 }
 
 .card .tag {
-    background-color: #FFE4E4;
+    background-color: #D1E7E0;
 }
+

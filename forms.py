@@ -23,15 +23,10 @@ class UserAddForm(ModelForm):
         only = ['username', 'password', 'email']
 
 
-class UserEditForm(FlaskForm):
+class UserEditForm(ModelForm):
     """Form for editing users."""
-
-    username = StringField('Username', validators=[DataRequired()])
-    email = StringField('E-mail', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[Length(min=6)])
-    image_url = StringField('Image URL')
-    country = StringField('Country')
-    bio = TextAreaField('About Yourself')
+    class Meta:
+        model = User
 
 
 class LoginForm(ModelForm):

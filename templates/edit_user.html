@@ -4,9 +4,9 @@
 
 {% block content %}
 
-<div>
-    <div>
-        <h2 class=>Sign up for Personalized Vault Experience</h2>
+<div class="card">
+    <div class="card-content">
+        <h2 class="title is-1">Change who you are!(but not really)</h2>
         <form method="POST" id="user_form">
             {{ form.hidden_tag() }}
 
@@ -23,7 +23,7 @@
             {% endfor %}
             <div class="field is-grouped">
                 <div class="control">
-                    <button class="button is-link">Sign me up!</button>
+                    <button class="button is-link">Change Me!</button>
                 </div>
                 <div class="control">
                     <a href="/">

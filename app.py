@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, flash, redirect, session, g, 
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 from wtforms_alchemy import ModelForm
-from forms import UserAddForm, LoginForm
+from forms import UserAddForm, LoginForm, UserEditForm
 from models import db, connect_db, User, Game, Collection, Mechanic, Category
 from config import Config
 from external_routes import search_board_games, update_mechanics, update_categories, add_game_to_db
@@ -111,6 +111,38 @@ def log_out():
 def user_details(user_id):
     user = User.query.get_or_404(user_id)
     return render_template("user_details.html", user=user)
+
+
+@app.route('/user/<int:user_id>/edit', methods=["GET", "POST"])
+def edit_user(user_id):
+    """Edit User"""
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
+    form = UserEditForm(obj=g.user)
+
+    if form.validate_on_submit():
+        password = form.password.data
+
+        user = User.authenticate(g.user.username, password)
+        if user:
+            user.username = form.username.data
+            user.email = form.email.data
+            user.bio = form.bio.data
+            user.image_url = form.image_url.data
+            user.country = form.country.data
+
+            db.session.commit()
+            flash("User Updated", "success")
+            do_logout()
+            do_login(user)
+            return redirect(f"/user/{user.id}")
+        else:
+            flash("Wrong Password", "danger")
+            return redirect("/")
+
+    return render_template("edit_user.html", form=form)
 
 
 @app.route('/games/<id>')

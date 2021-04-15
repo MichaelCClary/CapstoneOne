@@ -17,13 +17,6 @@ class User(db.Model):
         primary_key=True,
     )
 
-    email = db.Column(
-        EmailType,
-        nullable=False,
-        unique=True,
-        info={'label': 'Email'}
-    )
-
     username = db.Column(
         db.String,
         nullable=False,
@@ -31,19 +24,29 @@ class User(db.Model):
         info={'label': 'Username'}
     )
 
+    email = db.Column(
+        EmailType,
+        nullable=False,
+        unique=True,
+        info={'label': 'Email'}
+    )
+
     image_url = db.Column(
         db.Text,
         default="/static/images/avatar_default.png",
+        info={'label': 'Avatar Image URL'}
     )
 
     bio = db.Column(
         db.Text,
-        default=u''
+        default=u'',
+        info={'label': 'Bio'}
     )
 
     country = db.Column(
         db.Text,
-        default=u'USA'
+        default=u'USA',
+        info={'label': 'Country'}
     )
 
     password = db.Column(

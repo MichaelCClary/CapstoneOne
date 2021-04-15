@@ -1,9 +1,10 @@
 Known Issues
 Image sizing of collection on user details
-not updating correct button on home page when adding to collection
+update requirements.txt
 
 Todos
 Edit User page
 Delete from collection
 Search page
 Organize/edit collection
+Testing

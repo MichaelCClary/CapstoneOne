@@ -13,7 +13,7 @@
                 <div class="media-content">
                     <p class="title is-1">
                         {{g.user['username']}}
-                        <a href="/user/edit/<user-id>" class="button is-info">
+                        <a href="/user/{{user['id']}}/edit" class="button is-info">
                             <i class="fas fa-user-edit"></i>
                             <span>&nbsp;</span> Edit
                         </a>
@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-        <p class="title is-2">Collection</p>
+        <p class="title is-2 ml-5">Collection</p>
         <div class="tile is-ancestor is-flex-wrap-wrap">
             {% for game in user.collection %}
             <div class="tile is-5 ml-5">
@@ -35,11 +35,13 @@
                                 <div class="media">
                                     <div class="media-left">
                                         <figure class="image is-128x128">
-                                            <img src={{game['image_url']}} alt="{{game['name']}} image">
+                                            <img src={{game['image_url']}} alt="{{game['name']}} image"
+                                                class="collection_image">
                                         </figure>
                                     </div>
                                     <div class="media-content">
                                         <p class="title is-4">{{game['name']}}</p>
+                                        <a class="button is-link pl-3" href="/games/{{game['api_id']}}">More Info</a>
                                     </div>
                                 </div>
                             </div>

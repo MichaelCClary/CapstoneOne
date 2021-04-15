@@ -10,8 +10,9 @@ $(document).ready(function () {
     });
 });
 
-$(document).on("click", "#addCollection", function () {
-    const id = $(this).attr('data-id');
+$(document).on("click", ".addCollection", function () {
+    const id = $(this).attr('id');
+    console.log(id)
     addToCollection(id)
 });
 
@@ -19,9 +20,8 @@ $(document).on("click", "#addCollection", function () {
 async function addToCollection(id) {
     const result = await axios.post(`/api/collection/add`, { id: id });
     if (result.data == "added") {
-        $("#addCollection").html("<i class='far fa-check-square'></i> <span>&nbsp;</span> Collected");
-        $("#addCollection").attr("class", "button is-info");
-        $("#addCollection").attr("id", "");
+        $(`#${id}`).html("<i class='far fa-check-square'></i> <span>&nbsp;</span> Collected");
+        $(`#${id}`).attr("class", "button is-info");
     } else {
         $("#collection_error").html("<p>Can't add that to your collection when not logged in</p")
     }
