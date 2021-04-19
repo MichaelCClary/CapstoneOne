@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, flash, redirect, session, g, 
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 from wtforms_alchemy import ModelForm
-from forms import UserAddForm, LoginForm, UserEditForm
+from forms import UserAddForm, LoginForm, UserEditForm, SearchForm
 from models import db, connect_db, User, Game, Collection, Mechanic, Category
 from config import Config
 from external_routes import search_board_games, update_mechanics, update_categories, add_game_to_db
@@ -177,6 +177,23 @@ def add_to_collection():
     g.user.collection.append(game)
     db.session.commit()
     return jsonify("added")
+
+
+@app.route("/search")
+def search():
+    form = SearchForm()
+    search_params = {}
+    searchby = request.args.get('searchby', None)
+    if searchby:
+        search_params[searchby] = request.args.get(searchby)
+    else:
+        search_params['name'] = request.args.get('name')
+
+    search_params['fuzzy_match'] = True
+    print(search_params, flush=True)
+    games = search_board_games(search_params)
+
+    return render_template('search.html', games=games['games'], form=form)
 
 
 def get_collection_ids(user):

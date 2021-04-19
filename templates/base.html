@@ -29,10 +29,10 @@
 
         <div id="navbar" class="navbar-menu">
             <div class="navbar-start">
-
-                <a class="navbar-item">
-                    Search
-                </a>
+                <form action="/search" class="navbar-item">
+                    <input type="search" class="navbar-item" placeholder="Find Your Game" name="name">
+                    <button class="button is-info ml-2">Search</button>
+                </form>
             </div>
             {% if not g.user %}
             <div class="navbar-end">
@@ -65,7 +65,7 @@
     </nav>
 
 
-    <div class="container">
+    <div class="container alert-container">
         {% for category, message in get_flashed_messages(with_categories=True) %}
         <div class="alert alert-{{ category }}">{{ message }}</div>
         {% endfor %}

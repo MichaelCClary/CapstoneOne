@@ -21,3 +21,12 @@ html, body {
     background-color: #D1E7E0;
 }
 
+.alert {
+    background-color: #D1E7E0;
+    text-align: center;
+    font-size: 3rem;
+}
+
+.hide {
+    display: none;
+}

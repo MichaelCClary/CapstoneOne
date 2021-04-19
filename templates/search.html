@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <div class="card-content">
+        <form method="GET">
+
+            {% for field in form if field.widget.input_type != 'hidden' %}
+            {% for error in field.errors %}
+            <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+            <div class="field">
+                <label for="field" class="label">{{field.label.text}}</label>
+                <div class="control">
+                    {{field(class_="input")}}
+                </div>
+            </div>
+            {% endfor %}
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="button is-link">Search</button>
+                </div>
+                <div class="control">
+                    <a href="/">
+                        <button class="button is-dark" type="button">Cancel</button>
+                    </a>
+                </div>
+            </div>
+
+        </form>
+        {%if games|length == 0%}
+        <h1>Sorry No games match that name, please try again</h1>
+        {%endif%}
+    </div>
+</div>
+
+<section>
+    {% for game in games %}
+    <div class="card">
+        <div class="card-content">
+            <div class="media">
+                <div class="media-left">
+                    <figure class="image is-128x128">
+                        <img src={{game['image_url']}} alt="{{game['name']}} image">
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <p class="title is-4">{{game['name']}}</p>
+                    <nav class="breadcrumb" aria-label="breadcrumbs">
+                        <ul>
+                            <li><a class="button is-link pl-3" href="/games/{{game['id']}}">More Info</a></li>
+                            {% if game['id'] not in ids %}
+                            <li><button class="button is-success addCollection pl-2" id="{{game['id']}}" type="button">
+                                    Add To Collection</button>
+                            </li>
+                            {%else%}
+                            <li><button class="button is-info" data-id="{{game['id']}}" type="button">
+                                    <i class="far fa-check-square"></i> <span>&nbsp;</span> Collected
+                                </button></li>
+                            {% endif %}
+
+                        </ul>
+                        <div id="collection_error"></div>
+                    </nav>
+                    <div class="media-content">
+                        {{game['description']|safe}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+{% endblock %}

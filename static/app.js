@@ -26,3 +26,20 @@ async function addToCollection(id) {
         $("#collection_error").html("<p>Can't add that to your collection when not logged in</p")
     }
 }
+
+$(document).on("change", "#searchby", function () {
+    const val = $(this).val();
+    hideFields();
+    $(`#${val}`).parent().parent().show()
+});
+
+function hideFields() {
+    const elementsArr = [
+        $('#mechanics'),
+        $('#name'),
+        $('#categories'),
+    ];
+    elementsArr.forEach($elem => $elem.parent().parent().hide());
+}
+
+hideFields()
