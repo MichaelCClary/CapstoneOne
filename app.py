@@ -189,6 +189,7 @@ def search():
     else:
         search_params['name'] = request.args.get('name')
 
+    search_params['order_by'] = request.args.get('order_by', 'popularity')
     search_params['fuzzy_match'] = True
     print(search_params, flush=True)
     games = search_board_games(search_params)

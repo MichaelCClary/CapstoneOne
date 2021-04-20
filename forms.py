@@ -34,6 +34,14 @@ searchby_choices = [
     ("categories", "Category")
 ]
 
+order_choices = {
+    "popularity": "Popularity",
+    "name": "Name",
+    "name_reverse": "Name Reverse",
+    "price": "Price",
+    "price_reverse": "Price Reverse",
+}
+
 
 class ModelForm(BaseModelForm):
     @classmethod
@@ -68,3 +76,5 @@ class SearchForm(FlaskForm):
     name = SearchField('Name')
     mechanics = SelectField('Mechanic', choices=mechanic_choices)
     categories = SelectField('Category', choices=category_choices)
+    order_by = SelectField('Order By', choices=[
+                          (k, v) for k, v in order_choices.items()])
