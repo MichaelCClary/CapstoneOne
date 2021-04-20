@@ -65,7 +65,7 @@ class User(db.Model):
     #     "Game",
     #     secondary="collections",
     #     backref=db.backref('user', lazy='subquery')
-    )
+    # )
 
     def __repr__(self):
         return f"<User #{self.id}: {self.username}, {self.email}>"
@@ -77,14 +77,14 @@ class User(db.Model):
         Hashes password and adds user to system.
         """
 
-        hashed_pwd=flask_bcrypt.generate_password_hash(
+        hashed_pwd = flask_bcrypt.generate_password_hash(
             password).decode('UTF-8')
 
-        user=User(
-            username = username,
-            email = email,
-            password = hashed_pwd,
-            image_url = image_url,
+        user = User(
+            username=username,
+            email=email,
+            password=hashed_pwd,
+            image_url=image_url,
         )
 
         db.session.add(user)
@@ -233,7 +233,6 @@ class User(db.Model):
 #     )
 
 
-
 # class Rating(db.Model):
 #     """User Rating of games"""
 
@@ -287,7 +286,6 @@ class User(db.Model):
 #                                      default=datetime.utcnow(),
 #                                      )
 #                            )
-
 
 
 # games_categories = db.Table('games_categories',
