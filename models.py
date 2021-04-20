@@ -266,50 +266,50 @@ class Rating(db.Model):
     )
 
 
-# games_mechanics = db.Table('games_mechanics',
-#                            db.Column('mechanic_id',
-#                                      db.Text,
-#                                      db.ForeignKey(
-#                                          'mechanics.id', ondelete='cascade'),
-#                                      primary_key=True
-#                                      ),
+games_mechanics = db.Table('games_mechanics',
+                           db.Column('mechanic_id',
+                                     db.Text,
+                                     db.ForeignKey(
+                                         'mechanics.id', ondelete='cascade'),
+                                     primary_key=True
+                                     ),
 
-#                            db.Column('game_id',
-#                                      db.Integer,
-#                                      db.ForeignKey(
-#                                          'games.id', ondelete='cascade'),
-#                                      primary_key=True
-#                                      ),
+                           db.Column('game_id',
+                                     db.Integer,
+                                     db.ForeignKey(
+                                         'games.id', ondelete='cascade'),
+                                     primary_key=True
+                                     ),
 
-#                            db.Column('created_at',
-#                                      db.DateTime,
-#                                      nullable=False,
-#                                      default=datetime.utcnow(),
-#                                      )
-#                            )
+                           db.Column('created_at',
+                                     db.DateTime,
+                                     nullable=False,
+                                     default=datetime.utcnow(),
+                                     )
+                           )
 
 
-# games_categories = db.Table('games_categories',
-#                             db.Column('category_id',
-#                                       db.Text,
-#                                       db.ForeignKey(
-#                                           'categories.id', ondelete='cascade'),
-#                                       primary_key=True
-#                                       ),
+games_categories = db.Table('games_categories',
+                            db.Column('category_id',
+                                      db.Text,
+                                      db.ForeignKey(
+                                          'categories.id', ondelete='cascade'),
+                                      primary_key=True
+                                      ),
 
-#                             db.Column('game_id',
-#                                       db.Integer,
-#                                       db.ForeignKey(
-#                                           'games.id', ondelete='cascade'),
-#                                       primary_key=True
-#                                       ),
+                            db.Column('game_id',
+                                      db.Integer,
+                                      db.ForeignKey(
+                                          'games.id', ondelete='cascade'),
+                                      primary_key=True
+                                      ),
 
-#                             db.Column('created_at',
-#                                       db.DateTime,
-#                                       nullable=False,
-#                                       default=datetime.utcnow(),
-#                                       )
-#                             )
+                            db.Column('created_at',
+                                      db.DateTime,
+                                      nullable=False,
+                                      default=datetime.utcnow(),
+                                      )
+                            )
 
 
 class Collection(db.Model):
