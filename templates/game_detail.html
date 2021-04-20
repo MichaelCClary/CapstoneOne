@@ -15,9 +15,8 @@
 
                     <ul>
                         {% if game['api_id'] not in ids %}
-                        <li><button class="button is-success" data-id="{{game['api_id']}}" type="button"
-                                id="addCollection">Add To
-                                Collection</button>
+                        <li><button class="button is-success addCollection pl-2" id="{{game['api_id']}}" type="button">
+                                Add To Collection</button>
                         </li>
                         {%else%}
                         <li><button class="button is-info" data-id="{{game['api_id']}}" type="button">
@@ -26,7 +25,7 @@
                         {% endif %}
 
                     </ul>
-                    <div id="collection_error"></div>
+                    <div class="collection_error" id="{{game['id']}}_collection_error"></div>
 
                     <p>Players: {{game['min_players']}} - {{game['max_players']}} </p>
                     <p>Playtime: {{game['min_playtime']}} - {{game['max_playtime']}} Min</p>
