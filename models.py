@@ -189,6 +189,50 @@ class Game(db.Model):
     def __repr__(self):
         return f"<Game #{self.id}: {self.name}, {self.description}>"
 
+class Mechanic(db.Model):
+    """Game mechanics"""
+
+    __tablename__ = 'mechanics'
+
+    id = db.Column(
+        db.Text,
+        primary_key=True
+    )
+
+    name = db.Column(
+        db.Text,
+        nullable=False
+    )
+
+    created_at = db.Column(
+        db.DateTime,
+        nullable=False,
+        default=datetime.utcnow(),
+    )
+
+
+class Category(db.Model):
+    """Game categories"""
+
+    __tablename__ = 'categories'
+
+    id = db.Column(
+        db.Text,
+        primary_key=True
+    )
+
+    name = db.Column(
+        db.Text,
+        nullable=False
+    )
+
+    created_at = db.Column(
+        db.DateTime,
+        nullable=False,
+        default=datetime.utcnow(),
+    )
+
+
 
 class Rating(db.Model):
     """User Rating of games"""
@@ -222,28 +266,6 @@ class Rating(db.Model):
     )
 
 
-class Mechanic(db.Model):
-    """Game mechanics"""
-
-    __tablename__ = 'mechanics'
-
-    id = db.Column(
-        db.Text,
-        primary_key=True
-    )
-
-    name = db.Column(
-        db.Text,
-        nullable=False
-    )
-
-    created_at = db.Column(
-        db.DateTime,
-        nullable=False,
-        default=datetime.utcnow(),
-    )
-
-
 games_mechanics = db.Table('games_mechanics',
                            db.Column('mechanic_id',
                                      db.Text,
@@ -266,27 +288,6 @@ games_mechanics = db.Table('games_mechanics',
                                      )
                            )
 
-
-class Category(db.Model):
-    """Game categories"""
-
-    __tablename__ = 'categories'
-
-    id = db.Column(
-        db.Text,
-        primary_key=True
-    )
-
-    name = db.Column(
-        db.Text,
-        nullable=False
-    )
-
-    created_at = db.Column(
-        db.DateTime,
-        nullable=False,
-        default=datetime.utcnow(),
-    )
 
 
 games_categories = db.Table('games_categories',
