@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<section class="hero is-info">
+<section class="hero is-info has-text-centered">
     <div class="hero-body">
         <p class="title">
             Welcome to the Vault
@@ -8,7 +8,9 @@
         <p class="subtitle">
             A place to manage your board game collection and find new games for you and your friends.
         </p>
+        {% if not g.user %}
         <p>Sign up or Log in to get started!</p>
+        {% endif %}
     </div>
 </section>
 <section>
@@ -37,7 +39,7 @@
                             {% endif %}
 
                         </ul>
-                        <div id="collection_error"></div>
+                        <div class="collection_error" id="{{game['id']}}_collection_error"></div>
                     </nav>
                     <div class="media-content">
                         {{game['description']|safe}}

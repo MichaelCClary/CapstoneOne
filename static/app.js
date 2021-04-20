@@ -23,7 +23,7 @@ async function addToCollection(id) {
         $(`#${id}`).html("<i class='far fa-check-square'></i> <span>&nbsp;</span> Collected");
         $(`#${id}`).attr("class", "button is-info");
     } else {
-        $("#collection_error").html("<p>Can't add that to your collection when not logged in</p")
+        $(`#${id}_collection_error`).html("<p>Can't add that to your collection when not logged in</p")
     }
 }
 

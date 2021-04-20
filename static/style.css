@@ -30,3 +30,9 @@ html, body {
 .hide {
     display: none;
 }
+
+.collection_error {
+    color: red;
+    font-size: large;
+    font-weight: bold;
+}
