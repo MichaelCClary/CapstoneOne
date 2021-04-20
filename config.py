@@ -1,5 +1,4 @@
 import os
-from secrets import SECRET_KEY
 
 
 class Config(object):
