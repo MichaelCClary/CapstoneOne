@@ -343,9 +343,9 @@ class User(db.Model):
 #     )
 
 
-# def connect_db(app):
-#     """Connect this database to flask app.
-#     """
+def connect_db(app):
+    """Connect this database to flask app.
+    """
 
-#     db.app = app
-#     db.init_app(app)
+    db.app = app
+    db.init_app(app)

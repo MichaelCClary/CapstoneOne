@@ -1,5 +1,6 @@
 from app import app
-from models import db, connect_db, User, Game, Collection, Mechanic, Category
+from models import db, connect_db
+
 
 db.drop_all()
 db.create_all()
