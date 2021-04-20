@@ -61,30 +61,30 @@ class User(db.Model):
         default=datetime.utcnow(),
     )
 
-    collection = db.relationship(
-        "Game",
-        secondary="collections",
-        backref=db.backref('user', lazy='subquery')
+    # collection = db.relationship(
+    #     "Game",
+    #     secondary="collections",
+    #     backref=db.backref('user', lazy='subquery')
     )
 
     def __repr__(self):
         return f"<User #{self.id}: {self.username}, {self.email}>"
 
-    @classmethod
+    @ classmethod
     def signup(cls, username, email, password, image_url):
         """Sign up user.
 
         Hashes password and adds user to system.
         """
 
-        hashed_pwd = flask_bcrypt.generate_password_hash(
+        hashed_pwd=flask_bcrypt.generate_password_hash(
             password).decode('UTF-8')
 
-        user = User(
-            username=username,
-            email=email,
-            password=hashed_pwd,
-            image_url=image_url,
+        user=User(
+            username = username,
+            email = email,
+            password = hashed_pwd,
+            image_url = image_url,
         )
 
         db.session.add(user)
@@ -112,242 +112,242 @@ class User(db.Model):
         return False
 
 
-class Game(db.Model):
-    """Game schema"""
+# class Game(db.Model):
+#     """Game schema"""
 
-    __tablename__ = 'games'
+#     __tablename__ = 'games'
 
-    id = db.Column(
-        db.Integer,
-        primary_key=True,
-    )
+#     id = db.Column(
+#         db.Integer,
+#         primary_key=True,
+#     )
 
-    name = db.Column(
-        db.Text,
-        nullable=False
-    )
+#     name = db.Column(
+#         db.Text,
+#         nullable=False
+#     )
 
-    image_url = db.Column(
-        db.Text
-    )
+#     image_url = db.Column(
+#         db.Text
+#     )
 
-    description = db.Column(
-        db.Text
-    )
+#     description = db.Column(
+#         db.Text
+#     )
 
-    faq = db.Column(
-        db.Text
-    )
+#     faq = db.Column(
+#         db.Text
+#     )
 
-    msrp = db.Column(
-        db.Text
-    )
+#     msrp = db.Column(
+#         db.Text
+#     )
 
-    api_id = db.Column(
-        db.Text,
-        unique=True
-    )
+#     api_id = db.Column(
+#         db.Text,
+#         unique=True
+#     )
 
-    max_players = db.Column(
-        db.Integer
-    )
+#     max_players = db.Column(
+#         db.Integer
+#     )
 
-    min_players = db.Column(
-        db.Integer
-    )
+#     min_players = db.Column(
+#         db.Integer
+#     )
 
-    max_playtime = db.Column(
-        db.Integer
-    )
+#     max_playtime = db.Column(
+#         db.Integer
+#     )
 
-    min_playtime = db.Column(
-        db.Integer
-    )
+#     min_playtime = db.Column(
+#         db.Integer
+#     )
 
-    min_age = db.Column(
-        db.Integer
-    )
+#     min_age = db.Column(
+#         db.Integer
+#     )
 
-    created_at = db.Column(
-        db.DateTime,
-        nullable=False,
-        default=datetime.utcnow(),
-    )
+#     created_at = db.Column(
+#         db.DateTime,
+#         nullable=False,
+#         default=datetime.utcnow(),
+#     )
 
-    mechanics = db.relationship(
-        "Mechanic",
-        secondary="games_mechanics",
-        backref=db.backref('game', lazy='subquery')
-    )
+#     mechanics = db.relationship(
+#         "Mechanic",
+#         secondary="games_mechanics",
+#         backref=db.backref('game', lazy='subquery')
+#     )
 
-    categories = db.relationship(
-        "Category",
-        secondary="games_categories",
-        backref=db.backref('game', lazy='subquery')
-    )
+#     categories = db.relationship(
+#         "Category",
+#         secondary="games_categories",
+#         backref=db.backref('game', lazy='subquery')
+#     )
 
-    def __repr__(self):
-        return f"<Game #{self.id}: {self.name}, {self.description}>"
+#     def __repr__(self):
+#         return f"<Game #{self.id}: {self.name}, {self.description}>"
 
-class Mechanic(db.Model):
-    """Game mechanics"""
+# class Mechanic(db.Model):
+#     """Game mechanics"""
 
-    __tablename__ = 'mechanics'
+#     __tablename__ = 'mechanics'
 
-    id = db.Column(
-        db.Text,
-        primary_key=True
-    )
+#     id = db.Column(
+#         db.Text,
+#         primary_key=True
+#     )
 
-    name = db.Column(
-        db.Text,
-        nullable=False
-    )
+#     name = db.Column(
+#         db.Text,
+#         nullable=False
+#     )
 
-    created_at = db.Column(
-        db.DateTime,
-        nullable=False,
-        default=datetime.utcnow(),
-    )
-
-
-class Category(db.Model):
-    """Game categories"""
-
-    __tablename__ = 'categories'
-
-    id = db.Column(
-        db.Text,
-        primary_key=True
-    )
-
-    name = db.Column(
-        db.Text,
-        nullable=False
-    )
-
-    created_at = db.Column(
-        db.DateTime,
-        nullable=False,
-        default=datetime.utcnow(),
-    )
+#     created_at = db.Column(
+#         db.DateTime,
+#         nullable=False,
+#         default=datetime.utcnow(),
+#     )
 
 
+# class Category(db.Model):
+#     """Game categories"""
 
-class Rating(db.Model):
-    """User Rating of games"""
+#     __tablename__ = 'categories'
 
-    __tablename__ = 'ratings'
+#     id = db.Column(
+#         db.Text,
+#         primary_key=True
+#     )
 
-    id = db.Column(
-        db.Integer,
-        primary_key=True
-    )
+#     name = db.Column(
+#         db.Text,
+#         nullable=False
+#     )
 
-    user_id = db.Column(
-        db.Integer,
-        db.ForeignKey('users.id', ondelete='cascade')
-    )
-
-    game_id = db.Column(
-        db.Integer,
-        db.ForeignKey('games.id', ondelete='cascade'),
-        unique=True
-    )
-
-    created_at = db.Column(
-        db.DateTime,
-        nullable=False,
-        default=datetime.utcnow(),
-    )
-
-    rating = db.Column(
-        db.Integer
-    )
-
-
-games_mechanics = db.Table('games_mechanics',
-                           db.Column('mechanic_id',
-                                     db.Text,
-                                     db.ForeignKey(
-                                         'mechanics.id', ondelete='cascade'),
-                                     primary_key=True
-                                     ),
-
-                           db.Column('game_id',
-                                     db.Integer,
-                                     db.ForeignKey(
-                                         'games.id', ondelete='cascade'),
-                                     primary_key=True
-                                     ),
-
-                           db.Column('created_at',
-                                     db.DateTime,
-                                     nullable=False,
-                                     default=datetime.utcnow(),
-                                     )
-                           )
+#     created_at = db.Column(
+#         db.DateTime,
+#         nullable=False,
+#         default=datetime.utcnow(),
+#     )
 
 
 
-games_categories = db.Table('games_categories',
-                            db.Column('category_id',
-                                      db.Text,
-                                      db.ForeignKey(
-                                          'categories.id', ondelete='cascade'),
-                                      primary_key=True
-                                      ),
+# class Rating(db.Model):
+#     """User Rating of games"""
 
-                            db.Column('game_id',
-                                      db.Integer,
-                                      db.ForeignKey(
-                                          'games.id', ondelete='cascade'),
-                                      primary_key=True
-                                      ),
+#     __tablename__ = 'ratings'
 
-                            db.Column('created_at',
-                                      db.DateTime,
-                                      nullable=False,
-                                      default=datetime.utcnow(),
-                                      )
-                            )
+#     id = db.Column(
+#         db.Integer,
+#         primary_key=True
+#     )
 
+#     user_id = db.Column(
+#         db.Integer,
+#         db.ForeignKey('users.id', ondelete='cascade')
+#     )
 
-class Collection(db.Model):
-    """User collection of games"""
+#     game_id = db.Column(
+#         db.Integer,
+#         db.ForeignKey('games.id', ondelete='cascade'),
+#         unique=True
+#     )
 
-    __tablename__ = 'collections'
+#     created_at = db.Column(
+#         db.DateTime,
+#         nullable=False,
+#         default=datetime.utcnow(),
+#     )
 
-    id = db.Column(
-        db.Integer,
-        primary_key=True
-    )
-
-    user_id = db.Column(
-        db.Integer,
-        db.ForeignKey('users.id', ondelete='cascade')
-    )
-
-    game_id = db.Column(
-        db.Integer,
-        db.ForeignKey('games.id', ondelete='cascade')
-    )
-
-    created_at = db.Column(
-        db.DateTime,
-        nullable=False,
-        default=datetime.utcnow(),
-    )
-
-    name = db.Column(
-        db.Text,
-        default="Personal"
-    )
+#     rating = db.Column(
+#         db.Integer
+#     )
 
 
-def connect_db(app):
-    """Connect this database to flask app.
-    """
+# games_mechanics = db.Table('games_mechanics',
+#                            db.Column('mechanic_id',
+#                                      db.Text,
+#                                      db.ForeignKey(
+#                                          'mechanics.id', ondelete='cascade'),
+#                                      primary_key=True
+#                                      ),
 
-    db.app = app
-    db.init_app(app)
+#                            db.Column('game_id',
+#                                      db.Integer,
+#                                      db.ForeignKey(
+#                                          'games.id', ondelete='cascade'),
+#                                      primary_key=True
+#                                      ),
+
+#                            db.Column('created_at',
+#                                      db.DateTime,
+#                                      nullable=False,
+#                                      default=datetime.utcnow(),
+#                                      )
+#                            )
+
+
+
+# games_categories = db.Table('games_categories',
+#                             db.Column('category_id',
+#                                       db.Text,
+#                                       db.ForeignKey(
+#                                           'categories.id', ondelete='cascade'),
+#                                       primary_key=True
+#                                       ),
+
+#                             db.Column('game_id',
+#                                       db.Integer,
+#                                       db.ForeignKey(
+#                                           'games.id', ondelete='cascade'),
+#                                       primary_key=True
+#                                       ),
+
+#                             db.Column('created_at',
+#                                       db.DateTime,
+#                                       nullable=False,
+#                                       default=datetime.utcnow(),
+#                                       )
+#                             )
+
+
+# class Collection(db.Model):
+#     """User collection of games"""
+
+#     __tablename__ = 'collections'
+
+#     id = db.Column(
+#         db.Integer,
+#         primary_key=True
+#     )
+
+#     user_id = db.Column(
+#         db.Integer,
+#         db.ForeignKey('users.id', ondelete='cascade')
+#     )
+
+#     game_id = db.Column(
+#         db.Integer,
+#         db.ForeignKey('games.id', ondelete='cascade')
+#     )
+
+#     created_at = db.Column(
+#         db.DateTime,
+#         nullable=False,
+#         default=datetime.utcnow(),
+#     )
+
+#     name = db.Column(
+#         db.Text,
+#         default="Personal"
+#     )
+
+
+# def connect_db(app):
+#     """Connect this database to flask app.
+#     """
+
+#     db.app = app
+#     db.init_app(app)
