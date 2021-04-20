@@ -19,7 +19,7 @@ toolbar = DebugToolbarExtension(app)
 connect_db(app)
 
 bcrypt = Bcrypt()
-db.create_all()
+
 update_mechanics()
 update_categories()
 
