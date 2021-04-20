@@ -15,8 +15,8 @@ CURR_USER_KEY = "curr_user"
 app = Flask(__name__)
 app.config.from_object('config.Config')
 toolbar = DebugToolbarExtension(app)
-SQLALCHEMY_DATABASE_URI = (
-    os.environ.get('DATABASE_URL', 'postgresql:///boardgames_db'))
+# SQLALCHEMY_DATABASE_URI = (
+#     os.environ.get('DATABASE_URL', 'postgresql:///boardgames_db'))
 connect_db(app)
 
 bcrypt = Bcrypt()
