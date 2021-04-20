@@ -6,7 +6,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 from wtforms_alchemy import ModelForm
 from forms import UserAddForm, LoginForm, UserEditForm, SearchForm
-from models import db, connect_db, User
+from models import db, connect_db, User, Game, Collection, Mechanic, Category
 from config import Config
 from external_routes import search_board_games, update_mechanics, update_categories, add_game_to_db
 
@@ -19,9 +19,9 @@ toolbar = DebugToolbarExtension(app)
 connect_db(app)
 
 bcrypt = Bcrypt()
-db.create_all()
-# update_mechanics()
-# update_categories()
+
+update_mechanics()
+update_categories()
 
 
 @app.before_request

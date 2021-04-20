@@ -1,12 +1,12 @@
 import requests
 import os
-from models import db, connect_db, User
+from models import db, connect_db, User, Game, Collection, Mechanic, Category
 from flask import Flask
 
 app = Flask(__name__)
 app.config.from_object('config.Config')
 connect_db(app)
-client_id = os.environ.get('client_id')
+client_id = os.environ.get('SECRET_KEY')
 
 
 def search_board_games(data={}, type="search"):

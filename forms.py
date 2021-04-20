@@ -4,7 +4,7 @@ from wtforms.fields.html5 import SearchField
 from wtforms.widgets.html5 import NumberInput
 from wtforms.validators import DataRequired, Email, Length, Optional
 from wtforms_alchemy import ModelForm
-from models import User, db, connect_db
+from models import User, db, Mechanic, Category, connect_db
 from wtforms_alchemy import model_form_factory
 from flask import Flask
 # The variable db here is a SQLAlchemy object instance from
@@ -16,17 +16,17 @@ connect_db(app)
 
 BaseModelForm = model_form_factory(FlaskForm)
 
-# mechanic_query = Mechanic.query.all()
-# mechanic_choices = [(None, "....")]
-# for mechanic in mechanic_query:
-#     choice = (mechanic.id, mechanic.name)
-#     mechanic_choices.append(choice)
+mechanic_query = Mechanic.query.all()
+mechanic_choices = [(None, "....")]
+for mechanic in mechanic_query:
+    choice = (mechanic.id, mechanic.name)
+    mechanic_choices.append(choice)
 
-# category_query = Category.query.all()
-# category_choices = [(None, "....")]
-# for category in category_query:
-#     choice = (category.id, category.name)
-#     category_choices.append(choice)
+category_query = Category.query.all()
+category_choices = [(None, "....")]
+for category in category_query:
+    choice = (category.id, category.name)
+    category_choices.append(choice)
 
 searchby_choices = [
     ("", "..."),
@@ -77,8 +77,8 @@ class SearchForm(FlaskForm):
     """Form for searching api"""
     searchby = SelectField('Search By', choices=searchby_choices)
     name = SearchField('Name')
-    # mechanics = SelectField('Mechanic', choices=mechanic_choices)
-    # categories = SelectField('Category', choices=category_choices)
+    mechanics = SelectField('Mechanic', choices=mechanic_choices)
+    categories = SelectField('Category', choices=category_choices)
     min_players = IntegerField("Minimum Players", widget=NumberInput(
         min=1, max=20, step=1), validators=[Optional()])
     max_players = IntegerField("Maximum Players", widget=NumberInput(
