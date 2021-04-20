@@ -38,6 +38,8 @@ function hideFields() {
         $('#mechanics'),
         $('#name'),
         $('#categories'),
+        $('#min_players'),
+        $('#max_players'),
     ];
     elementsArr.forEach($elem => $elem.parent().parent().hide());
 }

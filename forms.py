@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms.fields import SelectField
+from wtforms.fields import SelectField, IntegerField
 from wtforms.fields.html5 import SearchField
-from wtforms.validators import DataRequired, Email, Length
+from wtforms.widgets.html5 import NumberInput
+from wtforms.validators import DataRequired, Email, Length, Optional
 from wtforms_alchemy import ModelForm
 from models import User, db, Mechanic, Category, connect_db
 from wtforms_alchemy import model_form_factory
@@ -31,15 +32,17 @@ searchby_choices = [
     ("", "..."),
     ("name", "Name"),
     ("mechanics", "Mechanic"),
-    ("categories", "Category")
+    ("categories", "Category"),
+    ("min_players", "Mininum Players"),
+    ("max_players", "Maximum Players"),
 ]
 
 order_choices = {
     "popularity": "Popularity",
-    "name": "Name",
-    "name_reverse": "Name Reverse",
-    "price": "Price",
-    "price_reverse": "Price Reverse",
+    "name": "Name (A-Z)",
+    "name_reverse": "Name (Z-A)",
+    "price": "Price (Low-High)",
+    "price_reverse": "Price (High-Low)",
 }
 
 
@@ -76,5 +79,9 @@ class SearchForm(FlaskForm):
     name = SearchField('Name')
     mechanics = SelectField('Mechanic', choices=mechanic_choices)
     categories = SelectField('Category', choices=category_choices)
+    min_players = IntegerField("Minimum Players", widget=NumberInput(
+        min=1, max=20, step=1), validators=[Optional()])
+    max_players = IntegerField("Maximum Players", widget=NumberInput(
+        min=1, max=20, step=1), validators=[Optional()])
     order_by = SelectField('Order By', choices=[
                           (k, v) for k, v in order_choices.items()])
