@@ -1,7 +1,6 @@
 import requests
 import os
 from models import db, connect_db, User
-from secrets import client_id
 from flask import Flask
 
 app = Flask(__name__)
