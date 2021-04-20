@@ -159,6 +159,21 @@ def game_details(id):
     return render_template('game_detail.html', game=game, ids=ids)
 
 
+@app.route('/games/<id>/delete')
+def delete_from_collection(id):
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
+    game = Game.query.filter(
+        Game.id == id).first()
+
+    g.user.collection.remove(game)
+    db.session.commit()
+    return redirect(f'/user/{g.user.id}')
+
+
 @app.route('/api/collection/add', methods=['POST'])
 def add_to_collection():
 
