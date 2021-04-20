@@ -174,17 +174,17 @@ class Game(db.Model):
         default=datetime.utcnow(),
     )
 
-    mechanics = db.relationship(
-        "Mechanic",
-        secondary="games_mechanics",
-        backref=db.backref('game', lazy='subquery')
-    )
+    # mechanics = db.relationship(
+    #     "Mechanic",
+    #     secondary="games_mechanics",
+    #     backref=db.backref('game', lazy='subquery')
+    # )
 
-    categories = db.relationship(
-        "Category",
-        secondary="games_categories",
-        backref=db.backref('game', lazy='subquery')
-    )
+    # categories = db.relationship(
+    #     "Category",
+    #     secondary="games_categories",
+    #     backref=db.backref('game', lazy='subquery')
+    # )
 
     def __repr__(self):
         return f"<Game #{self.id}: {self.name}, {self.description}>"
