@@ -1,6 +1,4 @@
 from flask_bcrypt import Bcrypt
-import os
-
 from flask import Flask, render_template, request, flash, redirect, session, g, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
@@ -159,22 +157,7 @@ def game_details(id):
     return render_template('game_detail.html', game=game, ids=ids)
 
 
-@app.route('/games/<id>/delete')
-def delete_from_collection(id):
-
-    if not g.user:
-        flash("Access unauthorized.", "danger")
-        return redirect("/")
-
-    game = Game.query.filter(
-        Game.id == id).first()
-
-    g.user.collection.remove(game)
-    db.session.commit()
-    return redirect(f'/user/{g.user.id}')
-
-
-@app.route('/api/collection/add', methods=['POST'])
+@app.route('/api/collection/toggle', methods=['POST'])
 def add_to_collection():
 
     if not g.user:
@@ -189,27 +172,36 @@ def add_to_collection():
     if not game:
         game = add_game_to_db(api_id)
 
-    g.user.collection.append(game)
-    db.session.commit()
-    return jsonify("added")
+    if game in g.user.collection:
+        g.user.collection.remove(game)
+        db.session.commit()
+        return jsonify("removed")
+    else:
+        g.user.collection.append(game)
+        db.session.commit()
+        return jsonify("added")
 
 
 @app.route("/search")
 def search():
-    form = SearchForm()
+
     search_params = {}
-    searchby = request.args.get('searchby', None)
-    if searchby:
-        search_params[searchby] = request.args.get(searchby)
+    searched = request.args.get('searchby', 'none')
+    if searched:
+        search_params[searched] = request.args.get(searched)
     else:
         search_params['name'] = request.args.get('name')
 
     search_params['order_by'] = request.args.get('order_by', 'popularity')
     search_params['fuzzy_match'] = True
-    print(search_params, flush=True)
+
+    form = keep_data_searchform(
+        searched, search_params[searched], search_params['order_by'])
     games = search_board_games(search_params)
 
-    return render_template('search.html', games=games['games'], form=form)
+    ids = get_collection_ids(g.user)
+
+    return render_template('search.html', games=games['games'], form=form, ids=ids)
 
 
 def get_collection_ids(user):
@@ -219,3 +211,17 @@ def get_collection_ids(user):
             ids.append(game.api_id)
 
     return ids
+
+
+def keep_data_searchform(searched, param, order):
+    form = SearchForm()
+    form.searchby.default = searched
+    if searched == 'name':
+        form.name.default = param
+    form.mechanics.default = param
+    form.categories.default = param
+    form.min_players.default = param
+    form.max_players.default = param
+    form.order_by.default = order
+    form.process()
+    return form

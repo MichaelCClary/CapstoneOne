@@ -3,7 +3,6 @@
 <div class="card">
     <div class="card-content">
         <form method="GET">
-
             {% for field in form if field.widget.input_type != 'hidden' %}
             {% for error in field.errors %}
             <span class="text-danger">{{ error }}</span>
@@ -17,11 +16,11 @@
             {% endfor %}
             <div class="field is-grouped">
                 <div class="control">
-                    <button class="button is-link">Search</button>
+                    <button class="button is-link">Get Results</button>
                 </div>
                 <div class="control">
                     <a href="/">
-                        <button class="button is-dark" type="button">Cancel</button>
+                        <button class="button is-dark" type="button">Home</button>
                     </a>
                 </div>
             </div>
@@ -48,16 +47,22 @@
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li><a class="button is-link pl-3" href="/games/{{game['id']}}">More Info</a></li>
+                            {% if g.user %}
                             {% if game['id'] not in ids %}
-                            <li><button class="button is-success addCollection pl-2" id="{{game['id']}}" type="button">
+                            <li><button class="button is-success toggleCollection pl-2" id="{{game['id']}}"
+                                    type="button">
                                     Add To Collection</button>
                             </li>
                             {%else%}
-                            <li><button class="button is-info" data-id="{{game['id']}}" type="button">
+                            <li><button class="button is-info toggleCollection" id="{{game['id']}}" type="button">
                                     <i class="far fa-check-square"></i> <span>&nbsp;</span> Collected
                                 </button></li>
                             {% endif %}
-
+                            {%else%}
+                            <li><a class="button is-primary pl-2" href="/login">
+                                    Log in to Collect</a>
+                            </li>
+                            {% endif %}
                         </ul>
                         <div id="collection_error"></div>
                     </nav>

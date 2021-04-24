@@ -27,7 +27,7 @@
         <p class="title is-2 ml-5">Collection</p>
         <div class="tile is-ancestor is-flex-wrap-wrap">
             {% for game in user.collection %}
-            <div class="tile is-5 ml-5">
+            <div class="tile is-5 ml-5" id="{{game['api_id']}}-tile">
                 <div class="tile is-parent">
                     <article class="tile is-child notification is-dark">
                         <div class="card">
@@ -45,9 +45,9 @@
                                     </div>
                                     <div class="media-right">
                                         <figure class="image is-24x24">
-                                            <a href="/games/{{game['id']}}/delete">
+                                            <div class="deleteFromCollection" id="{{game['api_id']}}">
                                                 <i class="fas fa-trash"></i>
-                                            </a>
+                                            </div>
                                         </figure>
                                     </div>
                                 </div>

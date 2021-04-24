@@ -2,11 +2,11 @@ import requests
 import os
 from models import db, connect_db, User, Game, Collection, Mechanic, Category
 from flask import Flask
-
+from secrets import client_id
 app = Flask(__name__)
 app.config.from_object('config.Config')
 connect_db(app)
-client_id = os.environ.get('SECRET_KEY')
+client_id = os.environ.get('client_id', client_id)
 
 
 def search_board_games(data={}, type="search"):
@@ -60,7 +60,6 @@ def add_game_to_db(id):
             image_url=game['image_url']
         )
         db.session.add(new_game)
-        db.session.commit()
 
         for mechanic in game['mechanics']:
             m = Mechanic.query.filter(

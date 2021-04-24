@@ -17,19 +17,19 @@ connect_db(app)
 BaseModelForm = model_form_factory(FlaskForm)
 
 mechanic_query = Mechanic.query.all()
-mechanic_choices = [(None, "....")]
+mechanic_choices = [(None, "Choose One")]
 for mechanic in mechanic_query:
     choice = (mechanic.id, mechanic.name)
     mechanic_choices.append(choice)
 
 category_query = Category.query.all()
-category_choices = [(None, "....")]
+category_choices = [(None, "Choose One")]
 for category in category_query:
     choice = (category.id, category.name)
     category_choices.append(choice)
 
 searchby_choices = [
-    ("", "..."),
+    ("nope", "Choose One"),
     ("name", "Name"),
     ("mechanics", "Mechanic"),
     ("categories", "Category"),

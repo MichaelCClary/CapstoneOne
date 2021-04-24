@@ -10,22 +10,38 @@ $(document).ready(function () {
     });
 });
 
-$(document).on("click", ".addCollection", function () {
+async function toggleCollection(id) {
+    return await axios.post(`/api/collection/toggle`, { id: id }).then(res => res.data);
+}
+
+function toggleCollectionButtons(res, id) {
+    if (res == "added") {
+        $(`#${id}`).html("<i class='far fa-check-square'></i> <span>&nbsp;</span> Collected");
+        $(`#${id}`).attr("class", "button is-info toggleCollection");
+    } else if (res == "removed") {
+        $(`#${id}`).html("Add to Collection");
+        $(`#${id}`).attr("class", "button is-success toggleCollection");
+    }
+}
+
+function removeFromCollection(res, id) {
+    if (res == "removed") {
+        $(`#${id}-tile`).remove();
+    }
+}
+
+$(document).on("click", ".toggleCollection", function () {
     const id = $(this).attr('id');
-    console.log(id)
-    addToCollection(id)
+    toggleCollection(id)
+        .then(res => toggleCollectionButtons(res, id))
 });
 
 
-async function addToCollection(id) {
-    const result = await axios.post(`/api/collection/add`, { id: id });
-    if (result.data == "added") {
-        $(`#${id}`).html("<i class='far fa-check-square'></i> <span>&nbsp;</span> Collected");
-        $(`#${id}`).attr("class", "button is-info");
-    } else {
-        $(`#${id}_collection_error`).html("<p>Can't add that to your collection when not logged in</p")
-    }
-}
+$(document).on("click", ".deleteFromCollection", function () {
+    const id = $(this).attr('id');
+    toggleCollection(id)
+        .then(res => removeFromCollection(res, id))
+});
 
 $(document).on("change", "#searchby", function () {
     const val = $(this).val();
@@ -44,4 +60,13 @@ function hideFields() {
     elementsArr.forEach($elem => $elem.parent().parent().hide());
 }
 
+function keepSearchParams() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchby = urlParams.get('searchby')
+    $(`#${searchby}`).parent().parent().show()
+}
+
+
+
 hideFields()
+keepSearchParams()
