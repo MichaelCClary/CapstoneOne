@@ -1,8 +1,4 @@
 Known Issues
-change tag background for mechanics
-
-add browse to navbar
-
 get rid of some results in browse that are junk --- cannot replicate now
 
 connect_db(app) in too many files
@@ -15,3 +11,4 @@ change how many results
 favicon
 vault icon
 update database schema
+make tags links

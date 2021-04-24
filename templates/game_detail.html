@@ -42,7 +42,7 @@
                 <p class="title is-4">Mechanics</p>
                 <div class="tags">
                     {% for mechanic in game['mechanics'] %}
-                    <span class="tag">
+                    <span class="tag is-link is-rounded">
                         {{mechanic['name']}}
                     </span>
                     {% endfor %}
@@ -50,7 +50,7 @@
                 <p class="title is-4">Categories</p>
                 <div class="tags">
                     {% for category in game['categories'] %}
-                    <span class="tag">
+                    <span class="tag is-link is-rounded">
                         {{category['name']}}
                     </span>
                     {% endfor %}

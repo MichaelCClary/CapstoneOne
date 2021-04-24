@@ -29,14 +29,18 @@
 
         <div id="navbar" class="navbar-menu">
             <div class="navbar-start">
-                <form action="/search" class="navbar-item">
-                    <input type="search" class="navbar-item" placeholder="Find Your Game" name="name">
-                    <button class="button is-info ml-2">Search</button>
-                </form>
+                <div class="navbar-item">
+                    <a href="/search" class="button navbar-item is-success"> Browse Games</a>
+                </div>
             </div>
-            {% if not g.user %}
             <div class="navbar-end">
                 <div class="navbar-item">
+                    <form action="/search" class="navbar-item">
+                        <input type="hidden" name=searchby value="name">
+                        <input type="search" class="navbar-item" placeholder="Find Your Game" name="name">
+                        <button class="button is-info ml-2">Search</button>
+                    </form>
+                    {% if not g.user %}
                     <div class="buttons">
                         <a class="button is-primary" href="/signup">
                             <strong>Sign up</strong>
@@ -45,11 +49,7 @@
                             Log in
                         </a>
                     </div>
-                </div>
-            </div>
-            {% else %}
-            <div class="navbar-end">
-                <div class="navbar-item">
+                    {% else %}
                     <div class="buttons">
                         <a class="button" href="/user/{{g.user.id}}">
                             <i class="fas fa-user"></i> <span>&nbsp;</span> {{ g.user.username}}
@@ -58,9 +58,10 @@
                             Log out
                         </a>
                     </div>
+                    {% endif %}
                 </div>
+
             </div>
-            {% endif %}
         </div>
     </nav>
 

@@ -184,14 +184,10 @@ def add_to_collection():
 
 @app.route("/search")
 def search():
-
     search_params = {}
-    searched = request.args.get('searchby', 'none')
-    if searched:
-        search_params[searched] = request.args.get(searched)
-    else:
-        search_params['name'] = request.args.get('name')
+    searched = request.args.get('searchby', None)
 
+    search_params[searched] = request.args.get(searched)
     search_params['order_by'] = request.args.get('order_by', 'popularity')
     search_params['fuzzy_match'] = True
 

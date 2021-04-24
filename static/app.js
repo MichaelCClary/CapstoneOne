@@ -62,7 +62,10 @@ function hideFields() {
 
 function keepSearchParams() {
     const urlParams = new URLSearchParams(window.location.search);
-    const searchby = urlParams.get('searchby')
+    let searchby = urlParams.get('searchby')
+    if (searchby == null) {
+        searchby = 'name'
+    }
     $(`#${searchby}`).parent().parent().show()
 }
 
