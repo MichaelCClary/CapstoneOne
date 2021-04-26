@@ -6,7 +6,7 @@
 
 
 from unittest import TestCase
-from models import db, User, Game, Collection, Category, Mechanic, connect_db
+from models import db, User, Game, Collection, Category, Mechanic
 from sqlalchemy.exc import IntegrityError
 
 
@@ -21,7 +21,7 @@ db.create_all()
 
 
 class UserModelTestCase(TestCase):
-    """Test model for user."""
+    """Test all models."""
 
     def setUp(self):
         """Create test client, add sample data."""

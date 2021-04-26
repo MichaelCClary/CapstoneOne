@@ -7,7 +7,7 @@ from forms import UserAddForm, LoginForm, UserEditForm, SearchForm, populate_cat
 from models import db, connect_db, User, Game, Collection, Mechanic, Category
 from config import Config
 from external_routes import search_board_games, update_mechanics, update_categories, add_game_to_db
-from helper_functions import get_collection_ids, keep_data_searchform
+from helper_functions import get_collection_api_ids, keep_data_searchform
 
 CURR_USER_KEY = "curr_user"
 
@@ -52,7 +52,7 @@ def homepage():
     """Show homepage
     """
     games = search_board_games()
-    ids = get_collection_ids(g.user)
+    ids = get_collection_api_ids(g.user)
     return render_template('home.html', games=games['games'], ids=ids)
 
 
@@ -153,7 +153,7 @@ def game_details(id):
     if not game:
         game = add_game_to_db(id)
 
-    ids = get_collection_ids(g.user)
+    ids = get_collection_api_ids(g.user)
 
     return render_template('game_detail.html', game=game, ids=ids)
 
@@ -196,6 +196,6 @@ def search():
         searched, search_params[searched], search_params['order_by'])
     games = search_board_games(search_params)
 
-    ids = get_collection_ids(g.user)
+    ids = get_collection_api_ids(g.user)
 
     return render_template('search.html', games=games['games'], form=form, ids=ids)

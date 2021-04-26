@@ -1,7 +1,8 @@
 from forms import SearchForm
 
 
-def get_collection_ids(user):
+def get_collection_api_ids(user):
+    """Gets all api_ids from user.colletion"""
     ids = []
     if user:
         for game in user.collection:
@@ -11,6 +12,7 @@ def get_collection_ids(user):
 
 
 def keep_data_searchform(searched, param, order):
+    """sets up the search form to pass in data"""
     form = SearchForm()
     form.searchby.default = searched
     if searched == 'name':
