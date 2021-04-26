@@ -9,7 +9,6 @@ from unittest import TestCase
 from helper_functions import get_collection_api_ids, keep_data_searchform
 from models import db, User, Game, Collection, Category, Mechanic
 from forms import SearchForm
-from sqlalchemy.exc import IntegrityError
 
 
 from app import app  # nopep8
