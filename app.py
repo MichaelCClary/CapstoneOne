@@ -3,10 +3,11 @@ from flask import Flask, render_template, request, flash, redirect, session, g, 
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 from wtforms_alchemy import ModelForm
-from forms import UserAddForm, LoginForm, UserEditForm, SearchForm
+from forms import UserAddForm, LoginForm, UserEditForm, SearchForm, populate_category_choices, populate_mechanic_choices
 from models import db, connect_db, User, Game, Collection, Mechanic, Category
 from config import Config
 from external_routes import search_board_games, update_mechanics, update_categories, add_game_to_db
+from helper_functions import get_collection_ids, keep_data_searchform
 
 CURR_USER_KEY = "curr_user"
 
@@ -198,26 +199,3 @@ def search():
     ids = get_collection_ids(g.user)
 
     return render_template('search.html', games=games['games'], form=form, ids=ids)
-
-
-def get_collection_ids(user):
-    ids = []
-    if user:
-        for game in user.collection:
-            ids.append(game.api_id)
-
-    return ids
-
-
-def keep_data_searchform(searched, param, order):
-    form = SearchForm()
-    form.searchby.default = searched
-    if searched == 'name':
-        form.name.default = param
-    form.mechanics.default = param
-    form.categories.default = param
-    form.min_players.default = param
-    form.max_players.default = param
-    form.order_by.default = order
-    form.process()
-    return form

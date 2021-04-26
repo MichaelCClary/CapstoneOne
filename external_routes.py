@@ -3,9 +3,7 @@ import os
 from models import db, connect_db, User, Game, Collection, Mechanic, Category
 from flask import Flask
 from secrets import client_id
-app = Flask(__name__)
-app.config.from_object('config.Config')
-connect_db(app)
+
 client_id = os.environ.get('client_id', client_id)
 
 

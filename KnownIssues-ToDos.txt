@@ -1,8 +1,6 @@
 Known Issues
 get rid of some results in browse that are junk --- cannot replicate now
-
-connect_db(app) in too many files
-
+tests use same db as production
 
 Todos
 Organize/edit collection
