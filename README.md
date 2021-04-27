@@ -187,6 +187,7 @@ Project Link: [https://github.com/MichaelCClary/CapstoneOne](https://github.com/
 * [Heroku](heroku.com)
 * [Font Awesome](https://fontawesome.com/)
 * [Board Game Atlas](https://www.boardgameatlas.com/api/docs)
+* [othneildrew](https://github.com/othneildrew/Best-README-Template)
 
 
 
