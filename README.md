@@ -39,7 +39,7 @@
   <h3 align="center">The Vault</h3>
 
   <p align="center">
-    project_description
+    This is a simple website to search for new games and keep track of your games in your collection.  I hope you enjoy playing around with it as much as I did making it.  Please let me know if there are any improvements/bugs for me to make.  I plan to keep working on this to make it better and better.
     <br />
     <a href="https://github.com/MichaelCClary/CapstoneOne"><strong>Explore the docs »</strong></a>
     <br />
@@ -97,6 +97,12 @@ Here's a blank template to get started:
 * [Bulma](https://bulma.io/)
 * [Flask](https://flask.palletsprojects.com/en/1.1.x/)
 * [JQuery](jquery.com)
+* [SQLAlchemy](https://www.sqlalchemy.org/)
+* [PSQL](https://www.postgresql.org/)
+* [Python](www.python.org)
+* [bcrypt](https://pypi.org/project/bcrypt/)
+* [Axios](https://github.com/axios/axios)
+* [WTForms](https://wtforms.readthedocs.io/en/2.3.x/)
 
 
 
@@ -107,11 +113,7 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+* Install python at python.org
 
 ### Installation
 
@@ -182,9 +184,9 @@ Project Link: [https://github.com/MichaelCClary/CapstoneOne](https://github.com/
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
-* []()
-* []()
-* []()
+* [Heroku](heroku.com)
+* [Font Awesome](https://fontawesome.com/)
+* [Board Game Atlas](https://www.boardgameatlas.com/api/docs)
 
 
 
