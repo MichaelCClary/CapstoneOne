@@ -195,13 +195,13 @@ Project Link: [https://github.com/MichaelCClary/CapstoneOne](https://github.com/
 [contributors-shield]: https://img.shields.io/github/contributors/MichaelCClary/repo.svg?style=for-the-badge
 [contributors-url]: https://github.com/MichaelCClary/CapstoneOne/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/MichaelCClary/repo.svg?style=for-the-badge
-[forks-url]: https://github.com/MichaelCClary/repo/network/members
+[forks-url]: https://github.com/MichaelCClary/CapstoneOne/network/members
 [stars-shield]: https://img.shields.io/github/stars/MichaelCClary/repo.svg?style=for-the-badge
-[stars-url]: https://github.com/MichaelCClary/repo/stargazers
+[stars-url]: https://github.com/MichaelCClary/CapstoneOne/stargazers
 [issues-shield]: https://img.shields.io/github/issues/MichaelCClary/repo.svg?style=for-the-badge
-[issues-url]: https://github.com/MichaelCClary/repo/issues
+[issues-url]: https://github.com/MichaelCClary/CapstoneOne/issues
 [license-shield]: https://img.shields.io/github/license/MichaelCClary/repo.svg?style=for-the-badge
-[license-url]: https://github.com/MichaelCClary/repo/blob/master/LICENSE.txt
+[license-url]: https://github.com/MichaelCClary/CapstoneOne/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/MichaelCClary
 
