@@ -192,15 +192,15 @@ Project Link: [https://github.com/MichaelCClary/CapstoneOne](https://github.com/
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/MichaelCClary/repo.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/MichaelCClary/CapstoneOne.svg?style=for-the-badge
 [contributors-url]: https://github.com/MichaelCClary/CapstoneOne/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/MichaelCClary/repo.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/MichaelCClary/CapstoneOne.svg?style=for-the-badge
 [forks-url]: https://github.com/MichaelCClary/CapstoneOne/network/members
-[stars-shield]: https://img.shields.io/github/stars/MichaelCClary/repo.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/MichaelCClary/CapstoneOne.svg?style=for-the-badge
 [stars-url]: https://github.com/MichaelCClary/CapstoneOne/stargazers
-[issues-shield]: https://img.shields.io/github/issues/MichaelCClary/repo.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/MichaelCClary/CapstoneOne.svg?style=for-the-badge
 [issues-url]: https://github.com/MichaelCClary/CapstoneOne/issues
-[license-shield]: https://img.shields.io/github/license/MichaelCClary/repo.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/MichaelCClary/CapstoneOne.svg?style=for-the-badge
 [license-url]: https://github.com/MichaelCClary/CapstoneOne/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/MichaelCClary
