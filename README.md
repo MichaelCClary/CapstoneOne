@@ -61,6 +61,9 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
+        <li><a href="#user-flow">User Flow</a></li>
+      </ul>
+      <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
@@ -71,7 +74,6 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -84,6 +86,28 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+I was inspired to make this project by own personal need for a way to organize my board games and to find new ones that are good.  We all have bought a game that we played once/never because it was too complicated, not fun or just not the right number of players.
+
+This is my first capstone project with Springboard.
+I built the backend with python using Flask and psql/SQLAlchemy for a database/ORM. I used Jinja, Vanilla Javascript, JQuery, and Bulma for front end.
+
+Every search hits the api to get games and homepage is a basic search of most popular games.  When you click on more information or add a game to your collection, then it is added to the database.  
+
+The search function was tricky because the api wouldn't let you search for say a name and a category at the same time.  It is a browse the category and search by name.  The categories/mechanics/players are in a select drop down menu for easy finding.
+
+I used Javascript to let you add/remove games from your collection without reloading page and to handle hiding search boxes you weren't currently using.
+
+Bulma was used to help layout the page and give me building blocks/style elements.  
+
+Special thank you to Board Game Atlas for their API which has thousands of games to comb through.
+
+## User Flow
+1. User will go to home page
+2. User can login/signup and be redirected back to homepage.
+3. User can then search/browse for new games to add to their collection from taskbar
+4. Any time user wants more information on a game, they just click more info button.
+5. User can check their collection/profile at any time by clicking on their name from task bar
+6. User can edit their information from their profile
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 <!-- 
@@ -135,14 +159,6 @@ To get a local copy up and running follow these simple steps.
    ```sh
    Flask Run
    ```
-<!-- 
-USAGE EXAMPLES
-## Usage
-<!-- 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources. -->
-
-<!-- _For live version, please refer to the [Documentation](https://example.com)_ -->
-
 
 
 <!-- ROADMAP -->
@@ -150,7 +166,20 @@ Use this space to show useful examples of how a project can be used. Additional 
 
 See the [open issues](https://github.com/MichaelCClary/CapstoneOne/issues) for a list of proposed features (and known issues).
 
+Current - high priority features
+* Tags as links to that mechanic
+* Improve search function
+* Add favicon/vault icon
+* A way to organize/reorder your collection
 
+Some more distance features
+* More than one list in collection
+* Friends/friends list
+* Browse other users
+* Rate games
+* Recommend games
+* A petting zoo
+* A batcave
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -163,7 +192,7 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-
+Email me if you have something you want me to add/a bug to fix and I will do my best.
 
 <!-- LICENSE -->
 ## License

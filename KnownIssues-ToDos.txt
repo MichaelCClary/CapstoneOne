@@ -4,7 +4,6 @@ tests use same db as production
 
 Todos
 Organize/edit collection
-Testing
 change how many results
 favicon
 vault icon
