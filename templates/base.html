@@ -30,13 +30,16 @@
         <div id="navbar" class="navbar-menu">
             <div class="navbar-start">
                 <div class="navbar-item">
-                    <a href="/search" class="button navbar-item is-success"> Browse Games</a>
+                    <form action="/search">
+                        <input type="hidden" name="searchby" value="browse">
+                        <button class="button navbar-item is-success">Browse Games</button>
+                    </form>
                 </div>
             </div>
             <div class="navbar-end">
                 <div class="navbar-item">
                     <form action="/search" class="navbar-item">
-                        <input type="hidden" name=searchby value="name">
+                        <input type="hidden" name='searchby' value="name">
                         <input type="search" class="navbar-item" placeholder="Find Your Game" name="name">
                         <button class="button is-info ml-2">Search</button>
                     </form>

@@ -2,7 +2,9 @@ import requests
 import os
 from models import db, connect_db, User, Game, Collection, Mechanic, Category
 from flask import Flask
-from config import client_id
+
+
+client_id = os.environ.get('CLIENT_ID')
 
 
 def search_board_games(data={}, type="search"):

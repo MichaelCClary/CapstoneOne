@@ -101,7 +101,6 @@ class UserViewsTestCase(TestCase):
                                follow_redirects=True)
             html = resp.get_data(as_text=True)
 
-            db.session.rollback()
             number_of_users_after = len(User.query.all())
 
             user = User.query.filter_by(
@@ -127,7 +126,6 @@ class UserViewsTestCase(TestCase):
                                follow_redirects=True)
             html = resp.get_data(as_text=True)
 
-            db.session.rollback()
             number_of_users_after = len(User.query.all())
 
             user = bool(User.query.filter_by(

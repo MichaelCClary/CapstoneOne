@@ -13,6 +13,5 @@ update database schema
 make tags links
 
 
-test dupes - look at db.session.rollback()
 test better bad database
 test length is greater for list

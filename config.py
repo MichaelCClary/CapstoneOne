@@ -1,7 +1,4 @@
 import os
-from api_key import client_id
-
-client_id = os.environ.get('client_id', client_id)
 
 SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', "")
 DEVELOPMENT = True
