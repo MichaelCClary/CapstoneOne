@@ -1,11 +1,16 @@
 import os
+from api_key import client_id
+
+client_id = os.environ.get('client_id', client_id)
+
+SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', "")
+DEVELOPMENT = True
+SECRET_KEY = os.environ.get('SECRET_KEY')
+DEBUG_TB_INTERCEPT_REDIRECTS = False
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+SQLALCHEMY_ECHO = False
 
 
-class Config(object):
-    SQLALCHEMY_DATABASE_URI = (
-        os.environ.get('DATABASE_URL', 'postgresql:///boardgames_db'))
-    DEVELOPMENT = True
-    SECRET_KEY = os.environ.get('SECRET_KEY', "it's a secret")
-    DEBUG_TB_INTERCEPT_REDIRECTS = False
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_ECHO = False
+if SQLALCHEMY_DATABASE_URI == "":
+    print('DATABASE_URL is blank, please load and try again', flush=True)
+    exit(1)

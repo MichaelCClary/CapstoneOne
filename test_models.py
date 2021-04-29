@@ -8,11 +8,16 @@
 from unittest import TestCase
 from models import db, User, Game, Collection, Category, Mechanic
 from sqlalchemy.exc import IntegrityError
+import sys
 
 
 from app import app  # nopep8
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///boardgames-test'
+# checks if database is test database
+if app.config['SQLALCHEMY_DATABASE_URI'] != 'postgresql:///boardgames-test':
+    print('Wrong database, BAD BAD BAD - use boardgames-test')
+    print('source .env-test')
+    sys.exit(1)
 
 # Create our tables (we do this here, so we only create the tables
 # once for all tests --- in each test, we'll delete the data

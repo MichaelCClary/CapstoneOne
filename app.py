@@ -1,3 +1,4 @@
+import signal
 from flask_bcrypt import Bcrypt
 from flask import Flask, render_template, request, flash, redirect, session, g, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
@@ -5,22 +6,22 @@ from sqlalchemy.exc import IntegrityError
 from wtforms_alchemy import ModelForm
 from forms import UserAddForm, LoginForm, UserEditForm, SearchForm, populate_category_choices, populate_mechanic_choices
 from models import db, connect_db, User, Game, Collection, Mechanic, Category
-from config import Config
 from external_routes import search_board_games, update_mechanics, update_categories, add_game_to_db
 from helper_functions import get_collection_api_ids, keep_data_searchform
 
 CURR_USER_KEY = "curr_user"
 
 app = Flask(__name__)
-app.config.from_object('config.Config')
+app.config.from_pyfile('config.py')
 toolbar = DebugToolbarExtension(app)
-
 connect_db(app)
 
 bcrypt = Bcrypt()
 
 update_mechanics()
 update_categories()
+populate_category_choices()
+populate_mechanic_choices()
 
 
 @app.before_request
@@ -158,7 +159,7 @@ def game_details(id):
 
 
 @app.route('/api/collection/toggle', methods=['POST'])
-def add_to_collection():
+def toggle_collection():
 
     if not g.user:
         return jsonify("error")

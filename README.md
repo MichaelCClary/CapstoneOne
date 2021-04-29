@@ -75,8 +75,8 @@
       </ul>
     </li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
+    <!-- <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li> -->
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
@@ -138,6 +138,7 @@ To get a local copy up and running follow these simple steps.
 ### Prerequisites
 
 * Install python at python.org
+* Install PSQL and setup database - my name is boardgames_db so change BOARDGAME_URL in .env if you want a different name
 
 ### Installation
 
@@ -151,11 +152,19 @@ To get a local copy up and running follow these simple steps.
    ```
 3. Get a free API key at https://www.boardgameatlas.com/api/docs
 
-4. Enter your API in api_key.py
+4. Enter your API in .env
    ```sh
    client_id = 'Enter API KEY'
    ```
-5. Run from terminal
+5. Enter your SECRET_KEY in .env
+   ```sh
+   SECRET_KEY = 'SECRET KEY HERE'
+   ```
+6. Set enviroment variables
+   ```sh
+   SOURCE .env
+   ```
+7. Run from terminal
    ```sh
    Flask Run
    ```
@@ -164,7 +173,7 @@ To get a local copy up and running follow these simple steps.
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/MichaelCClary/CapstoneOne/issues) for a list of proposed features (and known issues).
+<!-- See the [open issues](https://github.com/MichaelCClary/CapstoneOne/issues) for a list of proposed features (and known issues). -->
 
 Current - high priority features
 * Tags as links to that mechanic
@@ -182,7 +191,7 @@ Some more distance features
 * A batcave
 
 <!-- CONTRIBUTING -->
-## Contributing
+<!-- ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -195,10 +204,9 @@ Contributions are what make the open source community such an amazing place to b
 Email me if you have something you want me to add/a bug to fix and I will do my best.
 
 <!-- LICENSE -->
-## License
+<!-- ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
-
+Distributed under the MIT License. See `LICENSE` for more information. -->
 
 
 <!-- CONTACT -->

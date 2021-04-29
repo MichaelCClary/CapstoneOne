@@ -1,11 +1,18 @@
 Known Issues
-get rid of some results in browse that are junk --- cannot replicate now
-tests use same db as production
+get rid of some results in browse that are junk --- cannot reproduce now A-Z
+
+updating names to be better
 
 Todos
+update readme
 Organize/edit collection
 change how many results
 favicon
 vault icon
 update database schema
 make tags links
+
+
+test dupes - look at db.session.rollback()
+test better bad database
+test length is greater for list

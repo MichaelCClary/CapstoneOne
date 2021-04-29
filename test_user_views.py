@@ -11,9 +11,15 @@ from models import db, User, Game, Collection, Category, Mechanic
 from flask import Flask, session
 from app import do_login, do_logout, CURR_USER_KEY, add_user_to_g
 from sqlalchemy.exc import IntegrityError
+import sys
 
 from app import app  # nopep8
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///boardgames-test'
+
+# checks if database is test database
+if app.config['SQLALCHEMY_DATABASE_URI'] != 'postgresql:///boardgames-test':
+    print('Wrong database, BAD BAD BAD - use boardgames-test')
+    print('source .env-test')
+    sys.exit(1)
 
 
 # Don't req CSRF for testing
