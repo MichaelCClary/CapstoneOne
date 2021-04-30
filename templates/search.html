@@ -34,6 +34,7 @@
 
 <section>
     {% for game in games %}
+    {%if game['name']|length > 0%}
     <div class="card">
         <div class="card-content">
             <div class="media">
@@ -48,7 +49,7 @@
                         <ul>
                             <li><a class="button is-link pl-3" href="/games/{{game['id']}}">More Info</a></li>
                             {% if g.user %}
-                            {% if game['id'] not in ids %}
+                            {% if game['id'] not in collection_api_ids %}
                             <li><button class="button is-success toggleCollection pl-2" id="{{game['id']}}"
                                     type="button">
                                     Add To Collection</button>
@@ -73,6 +74,7 @@
             </div>
         </div>
     </div>
+    {%endif%}
     {% endfor %}
 </section>
 {% endblock %}

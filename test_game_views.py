@@ -82,6 +82,7 @@ class GameViewsTestCase(TestCase):
 
     def test_toggle_collection(self):
         """Toggle, first time adds to collection, 2nd time removes it"""
+        # Adds To collection
         url = '/api/collection/toggle'
         id = {'id': 'TAAifFP590'}
         with self.client as c:
@@ -90,29 +91,29 @@ class GameViewsTestCase(TestCase):
 
             resp = c.post(url, json=id)
 
-            self.assertEqual(resp.status_code, 200)
-
             user = User.query.get(self.u.id)
             data = resp.json
 
+            self.assertEqual(resp.status_code, 200)
             self.assertEqual(data, 'added')
             self.assertEqual(user.collection[0].api_id, id['id'])
 
+        # Removes it from collection
         with self.client as c:
             with c.session_transaction() as sess:
                 sess[CURR_USER_KEY] = self.u.id
 
             resp = c.post(url, json=id)
 
-            self.assertEqual(resp.status_code, 200)
-
             user = User.query.get(self.u.id)
 
             data = resp.json
+
+            self.assertEqual(resp.status_code, 200)
             self.assertEqual(data, 'removed')
             self.assertEqual(user.collection, [])
 
-    def test_search(self):
+    def test_search_default(self):
         """Search page"""
 
         # Default search - no query string
@@ -126,6 +127,7 @@ class GameViewsTestCase(TestCase):
             self.assertIn(
                 f"""<label for="field" class="label">Search By</label>""", html)
 
+    def test_search_name(self):
         # Search by name, name is dice and order_by popularity
         name = 'lol'
         url = f'search?searchby=name&name={name}&mechanics=None&categories=None&min_players=&max_players=&order_by=popularity'

@@ -14,7 +14,7 @@
                     <p class="title is-1">{{game['name']}}</p>
                     <ul>
                         {% if g.user %}
-                        {% if game['api_id'] not in ids %}
+                        {% if game['api_id'] not in collection_api_ids %}
                         <li><button class="button is-success toggleCollection pl-2" id="{{game['api_id']}}"
                                 type="button">
                                 Add To Collection</button>

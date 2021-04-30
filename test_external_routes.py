@@ -53,27 +53,29 @@ class ExternalRoutesTestCase(TestCase):
 
     def test_update_mechanics(self):
         """Updates mechanics in database from api"""
+        predicted_response = 'good_update'
         original_mechanics = Mechanic.query.all()
 
-        self.assertEqual(len(original_mechanics), 0)
-
-        update_mechanics()
+        actual_response = update_mechanics()
 
         updated_mechanics = Mechanic.query.all()
 
-        self.assertGreater(updated_mechanics, original_mechanics)
+        self.assertEqual(len(original_mechanics), 0)
+        self.assertEqual(actual_response, predicted_response)
+        self.assertGreater(len(updated_mechanics), len(original_mechanics))
 
     def test_update_categories(self):
         """Updates categories in database from api"""
+        predicted_response = 'good_update'
         original_categories = Category.query.all()
 
-        self.assertEqual(len(original_categories), 0)
-
-        update_categories()
+        actual_response = update_categories()
 
         updated_categories = Category.query.all()
 
-        self.assertGreater(updated_categories, original_categories)
+        self.assertEqual(len(original_categories), 0)
+        self.assertEqual(actual_response, predicted_response)
+        self.assertGreater(len(updated_categories), len(original_categories))
 
     def test_add_game_to_db(self):
         """using the api id of a game, adds game to database and returns it, if game already in database, just returns it"""
@@ -85,24 +87,36 @@ class ExternalRoutesTestCase(TestCase):
         first_game_search = Game.query.filter(
             Game.api_id == id).first()
 
-        self.assertEqual(first_game_search, None)
-        self.assertEqual(len(first_query_all), 0)
-
         added_game = add_game_to_db(id)
 
         second_query_all = Game.query.all()
         second_game_search = Game.query.filter(
             Game.api_id == id).first()
 
+        self.assertEqual(first_game_search, None)
+        self.assertEqual(len(first_query_all), 0)
         self.assertEqual(second_game_search, added_game)
         self.assertEqual(second_game_search.api_id, id)
         self.assertEqual(len(second_query_all), 1)
 
-        db.session.close()
+    def test_add_game_to_db_duplicate_game(self):
+        id = 'TAAifFP590'
 
+        add_game = add_game_to_db(id)
+
+        query_all = Game.query.all()
+
+        db.session.close()
         add_game_again = add_game_to_db(id)
 
-        third_query_all = Game.query.all()
+        query_all_again = Game.query.all()
 
-        self.assertEqual(len(second_query_all), len(third_query_all))
-        self.assertEqual(added_game.name, add_game_again.name)
+        self.assertEqual(len(query_all), len(query_all_again))
+        self.assertEqual(add_game.name, add_game_again.name)
+
+    def test_add_game_to_db_not_a_game(self):
+        id = 'ImnotagameIPromise'
+
+        add_game = add_game_to_db(id)
+
+        self.assertEqual(add_game, 'bad_response')

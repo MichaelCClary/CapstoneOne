@@ -1,9 +1,7 @@
-import signal
 from flask_bcrypt import Bcrypt
 from flask import Flask, render_template, request, flash, redirect, session, g, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
-from wtforms_alchemy import ModelForm
 from forms import UserAddForm, LoginForm, UserEditForm, SearchForm, populate_category_choices, populate_mechanic_choices
 from models import db, connect_db, User, Game, Collection, Mechanic, Category
 from external_routes import search_board_games, update_mechanics, update_categories, add_game_to_db
@@ -53,8 +51,8 @@ def homepage():
     """Show homepage
     """
     games = search_board_games()
-    ids = get_collection_api_ids(g.user)
-    return render_template('home.html', games=games['games'], ids=ids)
+    collection_api_ids = get_collection_api_ids(g.user)
+    return render_template('home.html', games=games['games'], collection_api_ids=collection_api_ids)
 
 
 @app.route('/signup', methods=["GET", "POST"])
@@ -153,9 +151,9 @@ def game_details(id):
     if not game:
         game = add_game_to_db(id)
 
-    ids = get_collection_api_ids(g.user)
+    collection_api_ids = get_collection_api_ids(g.user)
 
-    return render_template('game_detail.html', game=game, ids=ids)
+    return render_template('game_detail.html', game=game, collection_api_ids=collection_api_ids)
 
 
 @app.route('/api/collection/toggle', methods=['POST'])
@@ -164,8 +162,8 @@ def toggle_collection():
     if not g.user:
         return jsonify("error")
 
-    content = request.get_json()
-    api_id = content.get('id', "")
+    response = request.get_json()
+    api_id = response.get('id', "")
 
     game = Game.query.filter(
         Game.api_id == api_id).first()
@@ -186,16 +184,16 @@ def toggle_collection():
 @app.route("/search")
 def search():
     search_params = {}
-    searched = request.args.get('searchby', None)
+    searched_by = request.args.get('searchby', None)
 
-    search_params[searched] = request.args.get(searched)
+    search_params[searched_by] = request.args.get(searched_by)
     search_params['order_by'] = request.args.get('order_by', 'popularity')
     search_params['fuzzy_match'] = True
 
     form = keep_data_searchform(
-        searched, search_params[searched], search_params['order_by'])
+        searched_by, search_params[searched_by], search_params['order_by'])
     games = search_board_games(search_params)
 
-    ids = get_collection_api_ids(g.user)
+    collection_api_ids = get_collection_api_ids(g.user)
 
-    return render_template('search.html', games=games['games'], form=form, ids=ids)
+    return render_template('search.html', games=games['games'], form=form, collection_api_ids=collection_api_ids)

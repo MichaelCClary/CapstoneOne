@@ -4,7 +4,7 @@ from wtforms.fields.html5 import SearchField
 from wtforms.widgets.html5 import NumberInput
 from wtforms.validators import DataRequired, Email, Length, Optional
 from wtforms_alchemy import ModelForm
-from models import User, db, Mechanic, Category, connect_db
+from models import User, Mechanic, Category, db
 from wtforms_alchemy import model_form_factory
 from flask import Flask
 

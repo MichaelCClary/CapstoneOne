@@ -1,10 +1,6 @@
 Known Issues
-get rid of some results in browse that are junk --- cannot reproduce now A-Z
-
-updating names to be better
 
 Todos
-update readme
 Organize/edit collection
 change how many results
 favicon
@@ -14,4 +10,3 @@ make tags links
 
 
 test better bad database
-test length is greater for list

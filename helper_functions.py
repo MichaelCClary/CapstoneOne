@@ -3,19 +3,19 @@ from forms import SearchForm
 
 def get_collection_api_ids(user):
     """Gets all api_ids from user.colletion"""
-    ids = []
+    collection_api_ids = []
     if user:
         for game in user.collection:
-            ids.append(game.api_id)
+            collection_api_ids.append(game.api_id)
 
-    return ids
+    return collection_api_ids
 
 
-def keep_data_searchform(searched, param, order):
+def keep_data_searchform(searched_by, param, order):
     """sets up the search form to pass in data"""
     form = SearchForm()
-    form.searchby.default = searched
-    if searched == 'name':
+    form.searchby.default = searched_by
+    if searched_by == 'name':
         form.name.default = param
     form.mechanics.default = param
     form.categories.default = param
